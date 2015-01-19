@@ -1,0 +1,3 @@
+quizz_quizz_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: QuizzQuizzBundle:Default:index }
