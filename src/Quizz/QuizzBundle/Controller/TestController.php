@@ -4,10 +4,10 @@ namespace Quizz\QuizzBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
-{
+class TestController extends Controller{
+
     public function indexAction()
     {
-        return $this->render('QuizzQuizzBundle:Login:login.html.twig');
+        return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig');
     }
 }

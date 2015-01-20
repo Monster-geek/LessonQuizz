@@ -1,3 +1,7 @@
 quizz_quizz_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: QuizzQuizzBundle:Default:index }
+quizz_quizz_home:
+    path:     /test
+    defaults: { _controller: QuizzQuizzBundle:Test:index}
+
