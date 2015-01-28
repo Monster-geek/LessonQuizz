@@ -1,0 +1,8 @@
+Quizz\QuizzBundle\Entity\Achievements:
+    type: entity
+    table: Achievements
+    id:
+        fk_id_quizz:
+            type: integer
+        fk_id_student:
+            type: integer

@@ -1,0 +1,26 @@
+Quizz\QuizzBundle\Entity\Teachers:
+    type: entity
+    table: Teachers
+    id:
+        id_teacher:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        login_teacher:
+            type: string
+            length: 45
+        name_teacher:
+            type: string
+            lenght: 45
+        surname_teacher:
+            type: string
+            length: 45
+        mail_teacher:
+            type: string
+            length: 50
+        pwd_teacher:
+            type: string
+            length: 32
+        key_teacher:
+            type: string
+            length: 32

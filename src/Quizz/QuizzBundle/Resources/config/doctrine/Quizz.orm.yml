@@ -1,0 +1,18 @@
+Quizz\QuizzBundle\Entity\Quizz:
+    type: entity
+    table: Quizz
+    id:
+        id_quizz:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        title_quizz:
+            type: string
+            length: 45
+        description_quizz:
+            type: text
+        level_quizz:
+            type: integer
+        key_quizz:
+            type: string
+            length: 32
