@@ -1,7 +1,17 @@
 security:
+    role_hierarchy:
+        ROLE_TEACHER:     ROLE_STUDENT
+        ROLE_ADMIN:       ROLE_TEACHER
     providers:
-        in_memory:
-            memory: ~
+        main:
+            entity: { class: Quizz\QuizzBundle\Entity\Users, property: username }
+
+
+    encoders:
+        Quizz\QuizzBundle\Entity\Users:
+            algorithm:    sha512
+            iterations: 5000
+            encode_as_base64: true
 
     firewalls:
         dev:
@@ -10,3 +20,25 @@ security:
 
         default:
             anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:
+                path:   /logout
+
+        login_firewall:
+            pattern:   ^/login$
+            anonymous: ~
+
+    access_control:
+            # require ROLE_ADMIN for /admin/*
+            - { path: ^/admin/, roles: ROLE_ADMIN }
+            # require ROLE_STUDENT for /student/*
+            - { path: ^/student/, roles: ROLE_STUDENT }
+            # require ROLE_TEACHER for /teacher/*
+            - { path: ^/teacher/, roles: ROLE_TEACHER }
+            # require Anon role for /login*
+            - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            # require auth for /*
+            - {path: ^/ , roles: ROLE_STUDENT }
