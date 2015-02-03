@@ -1,7 +1,23 @@
-quizz_quizz_homepage:
+admin_home:
+    path:     /admin/
+    defaults: { _controller: QuizzQuizzBundle:Admin:index }
+
+student_home:
+    path:     /student/
+    defaults: { _controller: QuizzQuizzBundle:Student:index }
+
+teacher_home:
+    path:     /teacher/
+    defaults: { _controller: QuizzQuizzBundle:Teacher:index}
+
+login_route:
+    path:     /login
+    defaults: { _controller: QuizzQuizzBundle:Security:login }
+
+login_check:
+    path:     /login_check
+
+home_login:
     path:     /
     defaults: { _controller: QuizzQuizzBundle:Default:index }
-quizz_quizz_home:
-    path:     /test
-    defaults: { _controller: QuizzQuizzBundle:Test:index}
 

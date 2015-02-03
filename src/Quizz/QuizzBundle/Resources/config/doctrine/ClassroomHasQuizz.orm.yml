@@ -1,8 +1,0 @@
-Quizz\QuizzBundle\Entity\ClassroomHasQuizz:
-    type: entity
-    table: ClassroomHasQuizz
-    id:
-        fk_id_classroom:
-            type: integer
-        fk_id_quizz:
-            type: integer
