@@ -22,16 +22,16 @@
                                     </span>
                             <div class="media-body">
                                 <h5 class="media-heading">
-                                    <strong>John Smith</strong>
+                                    <strong>Jean BENOIT</strong>
                                 </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Hier à 16:32 </p>
+                                <p>Salut , tu as le cour sur les contrats de ...</p>
                             </div>
                         </div>
                     </a>
                 </li>
                 <li class="message-footer">
-                    <a href="#">Read All New Messages</a>
+                    <a href="#">Lire tout les messages.</a>
                 </li>
             </ul>
         </li>
@@ -39,16 +39,16 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
             <ul class="dropdown-menu alert-dropdown">
                 <li>
-                    <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                    <a href="#">Nom de l'alerte <span class="label label-default">Badge d'alerte</span></a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="#">View All</a>
+                    <a href="#">Tout voir.</a>
                 </li>
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Test <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user.name }} <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profil</a>
@@ -67,38 +67,53 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <li>
-                <a href="?p=home"><i class="fa fa-fw fa-dashboard"></i> Acceuil</a>
+                <a href="{{ path('home_login') }}"><i class="fa fa-fw fa-dashboard"></i> Acceuil</a>
             </li>
             <li>
-                <a href="?p=mail"><i class="fa fa-fw fa-envelope"></i> Messagerie</a>
+                <a href="#"><i class="fa fa-fw fa-envelope"></i> Messagerie</a>
             </li>
             <li>
-                <a href="?p=stat"><i class="fa fa-fw fa-bar-chart-o"></i> Statistiques</a>
+                <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistiques</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-question"></i> QCM <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="demo" class="collapse">
                     <li>
-                        <a href="#">Sommaire des QCM</a>
+                        <a href="#"><i class="fa fa-fw fa-home "></i> Sommaire des QCM</a>
                     </li>
+                    {% if is_granted('ROLE_STUDENT') %}
                     <li>
-                        <a href="#">QCM 1</a>
+                        <a href="{{ path('student_quizzdemo') }}"><i class="fa fa-fw fa-question-circle"></i>QCM demo</a>
                     </li>
-
-                    <li>
-                        <a href="#">QCM 2</a>
-                    </li>
-                    <li>
-                        <a href="?p=add_quizz">Ajouté un QCM</a>
-                    </li>
+                    {% endif %}
                 </ul>
             </li>
+
+            {% if is_granted('ROLE_TEACHER') %}
             <li>
-                <a href="?template=blank"><i class="fa fa-fw fa-file"></i> A propos</a>
+                <a href="{{ path('teacher_addstudent') }}"><i class="fa fa-fw fa-user"></i>Ajout élève</a>
             </li>
+
             <li>
-                <a href="?p=add_eleve">Ajout élève</a>
+                <a href="#"><i class="fa fa-fw fa-users"></i>Ajout d'une classe</a>
             </li>
+
+            <li>
+                <a href="#"><i class="fa fa-fw fa-plus-square"></i>Ajouter un QCM</a>
+            </li>
+
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('admin_addteacher') }}"><i class="fa fa-fw fa-user"></i>Ajout prof</a>
+            </li>
+            {% endif %}
+
+            <li>
+                <a href="#"><i class="fa fa-fw fa-file"></i> A propos</a>
+            </li>
+
         </ul>
     </div>
     <!-- /.navbar-collapse -->
