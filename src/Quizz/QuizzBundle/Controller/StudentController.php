@@ -21,4 +21,14 @@ class StudentController extends Controller {
         return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig', array('user'=>$current_user));
     }
 
+
+    public function quizzdemoAction()
+    {
+
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+        return $this->render('QuizzQuizzBundle:Student:quizzdemo.html.twig', array('user'=>$current_user));
+
+
+    }
 } 

@@ -14,4 +14,13 @@ class AdminController extends Controller {
         return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig', array('user'=>$current_user));
     }
 
+    public function addTeacherAction()
+    {
+
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+        return $this->render('QuizzQuizzBundle:Admin:AddTeacher.html.twig',array('user'=>$current_user));
+
+    }
+
 } 

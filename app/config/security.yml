@@ -1,7 +1,4 @@
 security:
-    role_hierarchy:
-        ROLE_TEACHER:     ROLE_STUDENT
-        ROLE_ADMIN:       ROLE_TEACHER
     providers:
         main:
             entity: { class: Quizz\QuizzBundle\Entity\Users, property: username }
@@ -41,4 +38,4 @@ security:
             # require Anon role for /login*
             - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             # require auth for /*
-            - {path: ^/ , roles: ROLE_STUDENT }
+            - { path: ^/ , roles: [ ROLE_STUDENT , ROLE_ADMIN , ROLE_TEACHER ] }

@@ -1,15 +1,43 @@
+################
+# Admin paths :
 admin_home:
     path:     /admin/
     defaults: { _controller: QuizzQuizzBundle:Admin:index }
 
+admin_addteacher:
+    path:     /admin/add_teacher
+    defaults : { _controller: QuizzQuizzBundle:Admin:addTeacher}
+
+###############
+# Student paths
 student_home:
     path:     /student/
     defaults: { _controller: QuizzQuizzBundle:Student:index }
 
+student_quizzsum:
+    path:     /student/quizz_summary
+    defaults: { _controller: QuizzQuizzBundle:Student:quizzSum }
+
+student_quizzdemo:
+    path:     /student/quizz_demo
+    defaults: { _controller: QuizzQuizzBundle:Student:quizzdemo }
+
+###############
+# Teacher paths:
 teacher_home:
     path:     /teacher/
-    defaults: { _controller: QuizzQuizzBundle:Teacher:index}
+    defaults: { _controller: QuizzQuizzBundle:Teacher:index }
 
+teacher_addstudent:
+    path:     /teacher/addstudent
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addStudent }
+
+teacher_addquizz:
+    path:     /teacher/addquizz
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
+
+###############
+# Common paths:
 login_route:
     path:     /login
     defaults: { _controller: QuizzQuizzBundle:Security:login }
