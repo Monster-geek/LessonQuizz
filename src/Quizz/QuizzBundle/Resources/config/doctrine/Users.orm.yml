@@ -28,3 +28,10 @@ Quizz\QuizzBundle\Entity\Users:
         lastname:
             type: string
             length: 20
+    manyToOne:
+        idclass:
+            targetEntity: Classroom
+            inversedBy: id
+            joinColumn:
+                name: idclass
+                referencedColumnName: id

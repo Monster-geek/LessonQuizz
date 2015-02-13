@@ -1,0 +1,19 @@
+Quizz\QuizzBundle\Entity\Classroom:
+    type: entity
+    table: classroom
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 20
+    oneToMany:
+            Users:
+                targetEntity: Users
+                mappedBy: id
+    oneToMany:
+            classHasQuizz:
+                targetEntity: classHasquizz
+                mappedBy: idclass

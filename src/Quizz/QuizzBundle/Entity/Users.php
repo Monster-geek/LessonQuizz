@@ -9,6 +9,8 @@ class Users implements UserInterface , \Serializable{
 
     private $id;
 
+    private $idclass;
+
     private $username;
 
     private $salt;
@@ -67,6 +69,28 @@ class Users implements UserInterface , \Serializable{
         return $this->username;
     }
 
+
+    /**
+     *
+     *  Set idclass
+     *
+     * @param mixed $idclass
+     */
+    public function setIdclass($idclass)
+    {
+        $this->idclass = $idclass;
+    }
+
+    /**
+     * Get Idclass
+     *
+     *
+     * @return mixed
+     */
+    public function getIdclass()
+    {
+        return $this->idclass;
+    }
 
 
     /**

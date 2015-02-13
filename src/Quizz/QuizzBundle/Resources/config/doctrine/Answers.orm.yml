@@ -1,0 +1,21 @@
+Quizz\QuizzBundle\Entity\Answers:
+    type: entity
+    table: Answers
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        value:
+            type: string
+            length: 320
+        style:
+            type: string
+            length: 20
+
+    oneToOne:
+        idquestion:
+          targetEntity: Questions
+          joinColumn:
+            name: idquestion
+            referencedColumnName: id
