@@ -36,6 +36,10 @@ teacher_addquizz:
     path:     /teacher/addquizz
     defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
 
+teacher_addclassroom:
+    path:     /teacher/addclassroom
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addClassroom }
+
 ###############
 # Common paths:
 login_route:
