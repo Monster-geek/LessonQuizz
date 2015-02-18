@@ -54,18 +54,38 @@ class TeacherController extends Controller {
             $lastname = $student->getLastname();
             $lastname = substr(strtolower(rtrim($lastname)), 0 , 1);
             $username = $lastname.strtolower(rtrim($student->getName()));
-            $student->setUsername($username);
+
             // Here doctrine will check if it's ok but will see this later...
-            // TODO : Check the username in the Database !!
+            $db_student = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Users');
+            $check = $db_student->findBy(array('username'=>$username));
 
+            //
+            if(!$check)
+            {
+                $student->setUsername($username);
+                // Doctrine section. Will persist the user in the database.
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($student);
+                $em->flush();
 
+            }
+            else
+            {
+                $username = $check[0]->getUsername();
+                preg_match('/(\d*)$/' , $username , $matches);
+                $username .= $matches[1]+1;
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($student);
-            $em->flush();
+                $student->setUsername($username);
+                // Doctrine section. Will persist the user in the database.
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($student);
+                $em->flush();
 
+            }
 
-            return $this->redirect($this->generateUrl('teacher_home'));
+            // Will redirect on the sucess page and display some usefull params like the passwords and the final username.
+            $param = array('password'=>$password , 'username' => $username , 'db_student' => $db_student);
+            return $this->redirect($this->generateUrl('teacher_home',$param));
         }
 
         $current_user = $this->get('security.context')->getToken()->getUser();
