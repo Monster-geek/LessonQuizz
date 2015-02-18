@@ -29,22 +29,7 @@
     <div class="row">
 
         <div class="col-lg-6">
-            <form>
-                <div class="form-group">
-                    <label for="_studentName">Nom de l'étudiant</label>
-                    <input type="text" class="form-control" id="_studentName" placeholder="Nom de l'étudiant">
-                </div>
-                <div class="form-group">
-                    <label for="_studentLastname">Prénom de l'étudiant</label>
-                    <input type="text" class="form-control" id="_studentLastname" placeholder="Prénom de l'étudiant">
-                </div>
-                <div class="form-group">
-                    <label for="_studentEmail">Adresse Email de l'étudiant</label>
-                    <input type="text" class="form-control" id="_studentEmail" placeholder="Adresse Email de l'étudiant">
-                </div>
-
-                <button type="submit" class="btn btn-default">Ajout</button>
-            </form>
+            {{ form(form) }}
         </div>
 
     </div>
