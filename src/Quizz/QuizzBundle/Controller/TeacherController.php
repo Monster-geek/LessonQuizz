@@ -71,9 +71,19 @@ class TeacherController extends Controller {
             }
             else
             {
-                $username = $check[0]->getUsername();
-                preg_match('/(\d*)$/' , $username , $matches);
-                $username .= $matches[1]+1;
+                while($check)
+                {
+                    $check = $db_student->findBy(array('username'=>$username));
+                    if($check)
+                    {
+                        $username = $check[0]->getUsername();
+                    }
+                    preg_match('/(\d*)$/' , $username , $matches);
+                    $username = preg_replace('/(\d*)$/', '',$username);
+                    $username .= $matches[1]+1;
+                    $check = $db_student->findBy(array('username'=>$username));
+                }
+
 
                 $student->setUsername($username);
                 // Doctrine section. Will persist the user in the database.
