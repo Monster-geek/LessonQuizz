@@ -4,17 +4,5 @@ Quizz\QuizzBundle\Entity\classHasQuizz:
     id:
         idtheme:
             type: integer
-    manyToOne:
         idclass:
-            targetEntity: Classroom
-            inversedBy: id
-            joinColumn:
-                name: idclass
-                referencedColumnName: id
-    manyToOne:
-        idtheme:
-            targetEntity: Themes
-            inversedBy: id
-            joinColumn:
-                name: idtheme
-                referencedColumnName: id
+            type: integer

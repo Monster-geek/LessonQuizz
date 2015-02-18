@@ -11,15 +11,17 @@ class Classroom {
 
     private $name;
 
-    protected $Users;
-
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_users;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->Users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->array_users = new ArrayCollection();
     }
 
     /**
@@ -56,35 +58,35 @@ class Classroom {
     }
 
     /**
-     * Add Users
+     * Add array_users
      *
-     * @param \Quizz\QuizzBundle\Entity\Users $users
+     * @param \Quizz\QuizzBundle\Entity\Users $arrayUsers
      * @return Classroom
      */
-    public function addUser(\Quizz\QuizzBundle\Entity\Users $users)
+    public function addArrayUser(Users $arrayUsers)
     {
-        $this->Users[] = $users;
+        $this->array_users[] = $arrayUsers;
 
         return $this;
     }
 
     /**
-     * Remove Users
+     * Remove array_users
      *
-     * @param \Quizz\QuizzBundle\Entity\Users $users
+     * @param \Quizz\QuizzBundle\Entity\Users $arrayUsers
      */
-    public function removeUser(\Quizz\QuizzBundle\Entity\Users $users)
+    public function removeArrayUser(Users $arrayUsers)
     {
-        $this->Users->removeElement($users);
+        $this->array_users->removeElement($arrayUsers);
     }
 
     /**
-     * Get Users
+     * Get array_users
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getUsers()
+    public function getArrayUsers()
     {
-        return $this->Users;
+        return $this->array_users;
     }
 }

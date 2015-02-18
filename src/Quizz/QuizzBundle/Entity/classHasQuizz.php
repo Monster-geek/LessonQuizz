@@ -10,33 +10,28 @@ class classHasQuizz {
 
     private $idtheme;
 
-    /**
-     * @var \Quizz\QuizzBundle\Entity\Classroom
-     */
-    private $idclassroom;
-
 
     /**
-     * Set idclassroom
+     * Set idtheme
      *
-     * @param \Quizz\QuizzBundle\Entity\Classroom $idclassroom
+     * @param integer $idtheme
      * @return classHasQuizz
      */
-    public function setIdclassroom(\Quizz\QuizzBundle\Entity\Classroom $idclassroom = null)
+    public function setIdtheme($idtheme)
     {
-        $this->idclassroom = $idclassroom;
+        $this->idtheme = $idtheme;
 
         return $this;
     }
 
     /**
-     * Get idclassroom
+     * Get idtheme
      *
-     * @return \Quizz\QuizzBundle\Entity\Classroom 
+     * @return integer 
      */
-    public function getIdclassroom()
+    public function getIdtheme()
     {
-        return $this->idclassroom;
+        return $this->idtheme;
     }
 
     /**
@@ -60,28 +55,5 @@ class classHasQuizz {
     public function getIdclass()
     {
         return $this->idclass;
-    }
-
-    /**
-     * Set idtheme
-     *
-     * @param integer $idtheme
-     * @return classHasQuizz
-     */
-    public function setIdtheme($idtheme)
-    {
-        $this->idtheme = $idtheme;
-
-        return $this;
-    }
-
-    /**
-     * Get idtheme
-     *
-     * @return integer 
-     */
-    public function getIdtheme()
-    {
-        return $this->idtheme;
     }
 }

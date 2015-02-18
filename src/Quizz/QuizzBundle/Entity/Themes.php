@@ -3,6 +3,7 @@
 namespace Quizz\QuizzBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Themes {
 
@@ -20,7 +21,7 @@ class Themes {
      */
     public function __construct()
     {
-        $this->classHasQuizz = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->classHasQuizz = new ArrayCollection();
     }
 
     /**
@@ -62,7 +63,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz
      * @return Themes
      */
-    public function addClassHasQuizz(\Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz)
+    public function addClassHasQuizz(classHasQuizz $classHasQuizz)
     {
         $this->classHasQuizz[] = $classHasQuizz;
 
@@ -74,7 +75,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz
      */
-    public function removeClassHasQuizz(\Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz)
+    public function removeClassHasQuizz(classHasQuizz $classHasQuizz)
     {
         $this->classHasQuizz->removeElement($classHasQuizz);
     }

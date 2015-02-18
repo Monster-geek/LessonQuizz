@@ -274,4 +274,32 @@ class Users implements UserInterface , \Serializable{
             //$this->salt
             ) = unserialize($serialized);
     }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Classroom
+     */
+    private $fk_idclass;
+
+
+    /**
+     * Set fk_idclass
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $fkIdclass
+     * @return Users
+     */
+    public function setFkIdclass(\Quizz\QuizzBundle\Entity\Classroom $fkIdclass = null)
+    {
+        $this->fk_idclass = $fkIdclass;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idclass
+     *
+     * @return \Quizz\QuizzBundle\Entity\Classroom 
+     */
+    public function getFkIdclass()
+    {
+        return $this->fk_idclass;
+    }
 }

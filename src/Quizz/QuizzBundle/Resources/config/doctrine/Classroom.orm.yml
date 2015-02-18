@@ -10,10 +10,10 @@ Quizz\QuizzBundle\Entity\Classroom:
             type: string
             length: 20
     oneToMany:
-            Users:
+            array_users:
                 targetEntity: Users
-                mappedBy: id
+                mappedBy: fk_idclass
     oneToMany:
             classHasQuizz:
-                targetEntity: classHasquizz
+                targetEntity: classHasQuizz
                 mappedBy: idclass
