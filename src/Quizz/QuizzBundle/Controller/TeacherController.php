@@ -41,6 +41,9 @@ class TeacherController extends Controller {
         // Set his role
         $student->setRoles('ROLE_STUDENT');
 
+        // Get the list of availables classroom
+        // TODO : Implement this dude :D
+
         // Building the form
         $form = $this->createFormBuilder($student)
             ->setAction($this->generateUrl('teacher_addstudent'))
@@ -114,12 +117,28 @@ class TeacherController extends Controller {
 
         $current_user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('QuizzQuizzBundle:Teacher:AddStudent.html.twig', array('user'=>$current_user, 'form' => $form->createView() , 'add_box' =>$allow_box , 'login_info' => $login_info));
+        return $this->render('QuizzQuizzBundle:Teacher:AddStudent.html.twig', array('user'=>$current_user,
+                                                                                    'form' => $form->createView(),
+                                                                                    'add_box' =>$allow_box,
+                                                                                    'login_info' => $login_info));
 
     }
 
     public function addClassroomAction(Request $request)
     {
+
+        // If we have some GET parameters
+        $add_sucess = $request->query->get('error');
+        if($add_sucess == true)
+        {
+            $allow_box = true;
+            $classroom_info = array('classroom'=>$request->query->get('name'));
+        }
+        else
+        {
+            $allow_box = false;
+            $classroom_info = array('');
+        }
 
         $classroom = new Classroom();
 
@@ -136,17 +155,37 @@ class TeacherController extends Controller {
 
         if ($form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($classroom);
-            $em->flush();
+            $name = $classroom->getName();
 
+            // Regex to check the name. No space , only letters and digits.
+            $check_regex = preg_match('/^[A-Z\d]{2,7}$/', $name);
 
-            return $this->redirect($this->generateUrl('teacher_addstudent'));
+            // Check the avaibility in the database.
+            $db_classroom = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Classroom');
+            $check = $db_classroom->findBy(array('name'=>$name));
+
+            // If the check is ok, it's cool . If not we show an error.
+            if(!$check && $check_regex)
+            {
+                $param = array('error' => false, 'name' => $name);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($classroom);
+                $em->flush();
+            }
+            else
+            {
+                $param = array('error'=> true , 'name' => $name);
+            }
+
+            return $this->redirect($this->generateUrl('teacher_addclassroom',$param));
         }
 
         $current_user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('QuizzQuizzBundle:Teacher:AddClassroom.html.twig',array('user'=>$current_user , 'form' => $form->createView()));
+        return $this->render('QuizzQuizzBundle:Teacher:AddClassroom.html.twig',array('user'=>$current_user,
+                                                                                     'form' => $form->createView(),
+                                                                                     'add_box' => $allow_box,
+                                                                                     'result' => $classroom_info));
     }
 
 } 
