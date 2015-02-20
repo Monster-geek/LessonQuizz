@@ -41,9 +41,6 @@ class TeacherController extends Controller {
         // Set his role
         $student->setRoles('ROLE_STUDENT');
 
-        // Get the list of availables classroom
-        // TODO : Implement this dude :D
-
         // Building the form
         $form = $this->createFormBuilder($student)
             ->setAction($this->generateUrl('teacher_addstudent'))
@@ -51,6 +48,7 @@ class TeacherController extends Controller {
             ->add('name', 'text', array('attr' => array('class' => 'form-control' , 'placeholder' => 'Nom de l\'étudiant')))
             ->add('lastname' , 'text' ,array('attr' => array('class' => 'form-control' , 'placeholder' => 'Prenom de l\'étudiant')))
             ->add('email' , 'text' , array('attr' => array('class' => 'form-control' , 'placeholder' => 'Adresse email')))
+            ->add('fk_idclass', 'entity', array('class' => 'QuizzQuizzBundle:Classroom','property' => 'name'))
             ->add('Ajout' , 'submit' , array('attr'=>array('class'=> 'btn btn-default')))
             ->getForm();
 
@@ -59,9 +57,7 @@ class TeacherController extends Controller {
 
         if ($form->isValid()) {
 
-            // Time to do some custom operation :)
-
-            // First : let's generate the new password for the student.
+            // Now let's generate the new password for the student.
             // Warn : It's not a safe password. It must be change a the first login.
             $password = uniqid();
             $factory = $this->get('security.encoder_factory');
@@ -77,6 +73,7 @@ class TeacherController extends Controller {
             // Here doctrine will check if it's ok
             $db_student = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Users');
             $check = $db_student->findBy(array('username'=>$username));
+
 
             // This huge block will check in the database if the username is available.
             // if not it will add a digit at the end of the username like this : 'example1'
@@ -120,7 +117,8 @@ class TeacherController extends Controller {
         return $this->render('QuizzQuizzBundle:Teacher:AddStudent.html.twig', array('user'=>$current_user,
                                                                                     'form' => $form->createView(),
                                                                                     'add_box' =>$allow_box,
-                                                                                    'login_info' => $login_info));
+                                                                                    'login_info' => $login_info,
+                                                                                    'debug'=>$request));
 
     }
 
@@ -157,15 +155,12 @@ class TeacherController extends Controller {
 
             $name = $classroom->getName();
 
-            // Regex to check the name. No space , only letters and digits.
-            $check_regex = preg_match('/^[A-Z\d]{2,7}$/', $name);
-
             // Check the avaibility in the database.
             $db_classroom = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Classroom');
             $check = $db_classroom->findBy(array('name'=>$name));
 
             // If the check is ok, it's cool . If not we show an error.
-            if(!$check && $check_regex)
+            if(!$check)
             {
                 $param = array('error' => false, 'name' => $name);
                 $em = $this->getDoctrine()->getManager();

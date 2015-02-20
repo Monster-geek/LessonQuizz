@@ -24,6 +24,7 @@ class Classroom {
         $this->array_users = new ArrayCollection();
     }
 
+
     /**
      * Get id
      *

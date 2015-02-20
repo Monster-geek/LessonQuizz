@@ -28,7 +28,27 @@
     <div class="row">
 
         <div class="col-lg-6">
-            {{ form(form) }}
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+            <label>Nom de l'étudiant</label>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+            <br />
+            <label>Prenom de l'étudiant</label>
+            {{ form_errors(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+            <br />
+            <label>Email de l'étudiant</label>
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+            <br />
+            <label>Selectionnez une classe :</label>
+            {{ form_errors(form.fk_idclass) }}
+            {{ form_widget(form.fk_idclass) }}
+            <br />
+            {{ form_widget(form.Ajout) }}
+            {{ form_end(form) }}
         </div>
 
         {% if add_box == true %}

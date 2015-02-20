@@ -286,7 +286,7 @@ class Users implements UserInterface , \Serializable{
      * @param \Quizz\QuizzBundle\Entity\Classroom $fkIdclass
      * @return Users
      */
-    public function setFkIdclass(\Quizz\QuizzBundle\Entity\Classroom $fkIdclass = null)
+    public function setFkIdclass(Classroom $fkIdclass = null)
     {
         $this->fk_idclass = $fkIdclass;
 

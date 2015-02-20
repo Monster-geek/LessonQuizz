@@ -1,0 +1,28 @@
+Quizz\QuizzBundle\Entity\Users:
+    properties:
+        email:
+            - Email:
+                message: "'{{ value }}' n'est pas un email valide."
+                checkMX: true
+
+        lastname:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[a-zA-Z]{2,16}$/"
+                match:   true
+                message: " Votre prénom ne peut pas contenir de nombres ou de caractères spéciaux."
+        name:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[a-zA-Z]{2,16}$/"
+                match:   true
+                message: " Votre nom ne peut pas contenir de nombres ou de caractères spéciaux."
+
+Quizz\QuizzBundle\Entity\Classroom:
+    properties:
+        name:
+            - NotBlank: ~
+            - Regex:
+                pattern: "/^[A-Z\d]{2,7}$/"
+                match:   true
+                message: " Le libèllé de la classe doit être en majuscule et ne doit pas comporter de caractères spéciaux."
