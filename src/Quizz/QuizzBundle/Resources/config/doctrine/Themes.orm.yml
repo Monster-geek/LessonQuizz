@@ -9,6 +9,9 @@ Quizz\QuizzBundle\Entity\Themes:
         name:
             type: string
             length: 180
+        desc:
+            type: string
+            lenght: 320
     oneToMany:
             classHasQuizz:
                 targetEntity: classHasQuizz

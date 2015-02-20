@@ -11,6 +11,8 @@ class Themes {
 
     private $name;
 
+    private $desc;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -88,5 +90,28 @@ class Themes {
     public function getClassHasQuizz()
     {
         return $this->classHasQuizz;
+    }
+
+    /**
+     * Set desc
+     *
+     * @param string $desc
+     * @return Themes
+     */
+    public function setDesc($desc)
+    {
+        $this->desc = $desc;
+
+        return $this;
+    }
+
+    /**
+     * Get desc
+     *
+     * @return string 
+     */
+    public function getDesc()
+    {
+        return $this->desc;
     }
 }
