@@ -29,9 +29,4 @@ class SecurityController extends Controller{
         );
     }
 
-    public function loginCheckAction(Request $request)
-    {
-
-    }
-
 } 
