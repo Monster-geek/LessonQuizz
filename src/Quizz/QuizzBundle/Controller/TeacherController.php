@@ -11,11 +11,8 @@ class TeacherController extends Controller {
 
     public function indexAction()
     {
-
         $current_user = $this->get('security.context')->getToken()->getUser();
-
         return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig', array('user'=>$current_user));
-
     }
 
     public function addStudentAction(Request $request)
@@ -122,6 +119,7 @@ class TeacherController extends Controller {
 
     }
 
+    // TODO : Improve the error display.
     public function addClassroomAction(Request $request)
     {
 
@@ -139,8 +137,6 @@ class TeacherController extends Controller {
         }
 
         $classroom = new Classroom();
-
-        $classroom->setName('');
 
         $form = $this->createFormBuilder($classroom)
             ->setAction($this->generateUrl('teacher_addclassroom'))
@@ -175,12 +171,28 @@ class TeacherController extends Controller {
             return $this->redirect($this->generateUrl('teacher_addclassroom',$param));
         }
 
+        // Will load all the class fo display.
+        $db_classroom = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Classroom');
+        $all_classroom = $db_classroom->findAll();
+
+        $array_class = array();
+        foreach($all_classroom as $tmp)
+        {
+            $array_class[$tmp->getId()] = $tmp->getName();
+        }
+
         $current_user = $this->get('security.context')->getToken()->getUser();
 
         return $this->render('QuizzQuizzBundle:Teacher:AddClassroom.html.twig',array('user'=>$current_user,
                                                                                      'form' => $form->createView(),
                                                                                      'add_box' => $allow_box,
-                                                                                     'result' => $classroom_info));
+                                                                                     'result' => $classroom_info,
+                                                                                     'debug' => $array_class));
     }
 
+    public function quizzSummaryAction(Request $request)
+    {
+        $current_user = $this->get('security.context')->getToken()->getUser();
+        return $this->render('QuizzQuizzBundle:Front:QuizzSum.html.twig', array('user'=>$current_user));
+    }
 } 

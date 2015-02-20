@@ -8,6 +8,10 @@ admin_addteacher:
     path:     /admin/add_teacher
     defaults : { _controller: QuizzQuizzBundle:Admin:addTeacher}
 
+admin_about:
+    path:     /admin/about
+    defaults: { _controller: QuizzQuizzBundle:Default:about }
+
 ###############
 # Student paths
 student_home:
@@ -21,6 +25,10 @@ student_quizzsum:
 student_quizzdemo:
     path:     /student/quizz_demo
     defaults: { _controller: QuizzQuizzBundle:Student:quizzdemo }
+
+student_about:
+    path:     /student/about
+    defaults: { _controller: QuizzQuizzBundle:Default:about }
 
 ###############
 # Teacher paths:
@@ -39,6 +47,18 @@ teacher_addquizz:
 teacher_addclassroom:
     path:     /teacher/addclassroom
     defaults: { _controller: QuizzQuizzBundle:Teacher:addClassroom }
+
+teacher_addquizz:
+    path:     /teacher/addquizz
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
+
+teacher_quizzsummary:
+    path:     /teacher/quizzsummary
+    defaults: { _controller: QuizzQuizzBundle:Teacher:quizzSummary }
+
+teacher_about:
+    path:     /teacher/about
+    defaults: { _controller: QuizzQuizzBundle:Default:about }
 
 ###############
 # Common paths:
