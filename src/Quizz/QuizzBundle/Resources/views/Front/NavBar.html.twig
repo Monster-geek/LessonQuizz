@@ -75,19 +75,24 @@
             <li>
                 <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistiques</a>
             </li>
+
+            {% if is_granted('ROLE_TEACHER') %}
+                <li>
+                    <a href="{{ path('teacher_quizzsummary') }}"><i class="fa fa-fw fa-home "></i> Sommaire des QCM</a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_STUDENT') %}
+                <li>
+                    <a href="{{ path('student_quizzsum') }}"><i class="fa fa-fw fa-home "></i> Sommaire des QCM</a>
+                </li>
+            {% endif %}
+
+            {% if is_granted('ROLE_STUDENT') %}
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-question"></i> QCM <i class="fa fa-fw fa-caret-down"></i></a>
-                <ul id="demo" class="collapse">
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-home "></i> Sommaire des QCM</a>
-                    </li>
-                    {% if is_granted('ROLE_STUDENT') %}
-                    <li>
-                        <a href="{{ path('student_quizzdemo') }}"><i class="fa fa-fw fa-question-circle"></i>QCM demo</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                <a href="{{ path('student_quizzdemo') }}"><i class="fa fa-fw fa-question-circle"></i>QCM demo</a>
             </li>
+            {% endif %}
 
             {% if is_granted('ROLE_TEACHER') %}
             <li>
@@ -99,7 +104,7 @@
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-fw fa-plus-square"></i>Ajouter un QCM</a>
+                <a href="{{ path('teacher_addquizz') }}"><i class="fa fa-fw fa-plus-square"></i>Ajouter un QCM</a>
             </li>
 
             {% endif %}
@@ -111,7 +116,16 @@
             {% endif %}
 
             <li>
-                <a href="#"><i class="fa fa-fw fa-file"></i> A propos</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('admin_about') }}">
+                {% endif %}
+                {% if is_granted('ROLE_TEACHER') %}
+                    <a href="{{ path('teacher_about') }}">
+                {% endif %}
+                {% if is_granted('ROLE_STUDENT') %}
+                    <a href="{{ path('student_about') }}">
+                {% endif %}
+                    <i class="fa fa-fw fa-file"></i> A propos</a>
             </li>
 
         </ul>

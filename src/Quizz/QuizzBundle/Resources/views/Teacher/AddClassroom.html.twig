@@ -28,14 +28,33 @@
     <!-- Quick View Bare -->
     <div class="row">
 
-        <div class="col-lg-6">
-                {{ form(form) }}
+        <div class="col-lg-3">
+            <label>Libéllé de la classe.</label>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+            <br/>
+            {{ form_widget(form.Ajout) }}
         </div>
 
-        {% if add_box == true %}
-        <div class="col-lg-6">
-            {{ result }}
+
+        <div class="col-lg-2">
+            <table class="table">
+                <caption> Recaptulatif des classes .</caption>
+                <thead>
+                    <tr>
+                        <th>Libélé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for class in debug %}
+                    <tr>
+                        <td>{{ class }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
+        {% if add_box == true %}
         {% endif %}
     </div>
     <!-- /.row -->
