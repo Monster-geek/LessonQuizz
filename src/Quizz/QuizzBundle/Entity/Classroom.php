@@ -90,42 +90,43 @@ class Classroom {
     {
         return $this->array_users;
     }
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $array_class;
+    private $classrooms;
 
 
     /**
-     * Add array_class
+     * Add classrooms
      *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass
+     * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
      * @return Classroom
      */
-    public function addArrayClass(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass)
+    public function addClassroom(Themes $classrooms)
     {
-        $this->array_class[] = $arrayClass;
+        $this->classrooms[] = $classrooms;
 
         return $this;
     }
 
     /**
-     * Remove array_class
+     * Remove classrooms
      *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass
+     * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
      */
-    public function removeArrayClass(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass)
+    public function removeClassroom(Themes $classrooms)
     {
-        $this->array_class->removeElement($arrayClass);
+        $this->classrooms->removeElement($classrooms);
     }
 
     /**
-     * Get array_class
+     * Get classrooms
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getArrayClass()
+    public function getClassrooms()
     {
-        return $this->array_class;
+        return $this->classrooms;
     }
 }

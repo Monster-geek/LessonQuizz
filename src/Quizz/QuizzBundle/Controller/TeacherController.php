@@ -207,8 +207,8 @@ class TeacherController extends Controller {
             ->setAction($this->generateUrl('teacher_addtheme'))
             ->setMethod('POST')
             ->add('name', 'text', array('attr' => array('class' => 'form-control' , 'placeholder' => 'Nom du thème')))
-            ->add('desc' , 'textarea' ,array('attr' => array('class' => 'form-control' , 'placeholder' => 'Courte description du thème.')))
-            ->add('classHasQuizz','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
+            ->add('description' , 'textarea' ,array('attr' => array('class' => 'form-control' , 'placeholder' => 'Courte description du thème.')))
+            ->add('groups','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
                                                    'property' => 'name',
                                                    'multiple' => true,
                                                    'expanded' => true))
@@ -219,8 +219,17 @@ class TeacherController extends Controller {
         $form->handleRequest($request);
 
 
+        if($form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newtheme);
+            $em->flush();
+        }
+
 
         $current_user = $this->get('security.context')->getToken()->getUser();
-        return $this->render('QuizzQuizzBundle:Teacher:AddTheme.html.twig',array('user'=>$current_user , 'form'=>$form->createView()));
+        return $this->render('QuizzQuizzBundle:Teacher:AddTheme.html.twig',array('user'=>$current_user ,
+                                                                                 'form'=>$form->createView()
+                                                                                 ));
     }
 }

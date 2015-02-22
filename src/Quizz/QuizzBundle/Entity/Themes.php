@@ -16,14 +16,20 @@ class Themes {
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $classHasQuizz;
+    private $array_quizz;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $groups;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->classHasQuizz = new ArrayCollection();
+        $this->array_quizz = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -60,62 +66,6 @@ class Themes {
     }
 
     /**
-     * Add classHasQuizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz
-     * @return Themes
-     */
-    public function addClassHasQuizz(classHasQuizz $classHasQuizz)
-    {
-        $this->classHasQuizz[] = $classHasQuizz;
-
-        return $this;
-    }
-
-    /**
-     * Remove classHasQuizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $classHasQuizz
-     */
-    public function removeClassHasQuizz(classHasQuizz $classHasQuizz)
-    {
-        $this->classHasQuizz->removeElement($classHasQuizz);
-    }
-
-    /**
-     * Get classHasQuizz
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getClassHasQuizz()
-    {
-        return $this->classHasQuizz;
-    }
-
-    /**
-     * Set desc
-     *
-     * @param string $desc
-     * @return Themes
-     */
-    public function setDesc($desc)
-    {
-        $this->desc = $desc;
-
-        return $this;
-    }
-
-    /**
-     * Get desc
-     *
-     * @return string 
-     */
-    public function getDesc()
-    {
-        return $this->desc;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
@@ -137,87 +87,6 @@ class Themes {
     {
         return $this->description;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $array_theme;
-
-
-    /**
-     * Add array_theme
-     *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayTheme
-     * @return Themes
-     */
-    public function addArrayTheme(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayTheme)
-    {
-        $this->array_theme[] = $arrayTheme;
-
-        return $this;
-    }
-
-    /**
-     * Remove array_theme
-     *
-     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayTheme
-     */
-    public function removeArrayTheme(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayTheme)
-    {
-        $this->array_theme->removeElement($arrayTheme);
-    }
-
-    /**
-     * Get array_theme
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArrayTheme()
-    {
-        return $this->array_theme;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $Quizz;
-
-
-    /**
-     * Add Quizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\Quizz $quizz
-     * @return Themes
-     */
-    public function addQuizz(\Quizz\QuizzBundle\Entity\Quizz $quizz)
-    {
-        $this->Quizz[] = $quizz;
-
-        return $this;
-    }
-
-    /**
-     * Remove Quizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\Quizz $quizz
-     */
-    public function removeQuizz(\Quizz\QuizzBundle\Entity\Quizz $quizz)
-    {
-        $this->Quizz->removeElement($quizz);
-    }
-
-    /**
-     * Get Quizz
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuizz()
-    {
-        return $this->Quizz;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $array_quizz;
-
 
     /**
      * Add array_quizz
@@ -225,7 +94,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Quizz $arrayQuizz
      * @return Themes
      */
-    public function addArrayQuizz(\Quizz\QuizzBundle\Entity\Quizz $arrayQuizz)
+    public function addArrayQuizz(Quizz $arrayQuizz)
     {
         $this->array_quizz[] = $arrayQuizz;
 
@@ -237,7 +106,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\Quizz $arrayQuizz
      */
-    public function removeArrayQuizz(\Quizz\QuizzBundle\Entity\Quizz $arrayQuizz)
+    public function removeArrayQuizz(Quizz $arrayQuizz)
     {
         $this->array_quizz->removeElement($arrayQuizz);
     }
@@ -250,5 +119,38 @@ class Themes {
     public function getArrayQuizz()
     {
         return $this->array_quizz;
+    }
+
+    /**
+     * Add groups
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $groups
+     * @return Themes
+     */
+    public function addGroup(Classroom $groups)
+    {
+        $this->groups[] = $groups;
+
+        return $this;
+    }
+
+    /**
+     * Remove groups
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $groups
+     */
+    public function removeGroup(Classroom $groups)
+    {
+        $this->groups->removeElement($groups);
+    }
+
+    /**
+     * Get groups
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }
