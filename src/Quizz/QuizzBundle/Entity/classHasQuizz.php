@@ -27,7 +27,7 @@ class classHasQuizz {
     /**
      * Get idtheme
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdtheme()
     {
@@ -50,10 +50,66 @@ class classHasQuizz {
     /**
      * Get idclass
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdclass()
     {
         return $this->idclass;
+    }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Classroom
+     */
+    private $fk_idclass;
+
+
+    /**
+     * Set fk_idclass
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $fkIdclass
+     * @return classHasQuizz
+     */
+    public function setFkIdclass(Classroom $fkIdclass = null)
+    {
+        $this->fk_idclass = $fkIdclass;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idclass
+     *
+     * @return \Quizz\QuizzBundle\Entity\Classroom 
+     */
+    public function getFkIdclass()
+    {
+        return $this->fk_idclass;
+    }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Themes
+     */
+    private $fk_idtheme;
+
+
+    /**
+     * Set fk_idtheme
+     *
+     * @param \Quizz\QuizzBundle\Entity\Themes $fkIdtheme
+     * @return classHasQuizz
+     */
+    public function setFkIdtheme(\Quizz\QuizzBundle\Entity\Themes $fkIdtheme = null)
+    {
+        $this->fk_idtheme = $fkIdtheme;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idtheme
+     *
+     * @return \Quizz\QuizzBundle\Entity\Themes 
+     */
+    public function getFkIdtheme()
+    {
+        return $this->fk_idtheme;
     }
 }

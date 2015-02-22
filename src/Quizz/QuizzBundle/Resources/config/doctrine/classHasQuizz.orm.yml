@@ -2,7 +2,21 @@ Quizz\QuizzBundle\Entity\classHasQuizz:
     type: entity
     table: classHasQuizz
     id:
-        idtheme:
-            type: integer
         idclass:
             type: integer
+        idtheme:
+            type: integer
+    manyToOne:
+            fk_idclass:
+                targetEntity: Classroom
+                inversedBy: array_class
+                joinColumn:
+                    name: idclass
+                    referencedColumnName: id
+
+            fk_idtheme:
+                targetEntity: Themes
+                inversedBy: array_theme
+                joinColumn:
+                    name: idtheme
+                    referencedColumnName: id

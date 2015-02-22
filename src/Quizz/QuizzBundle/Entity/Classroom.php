@@ -90,4 +90,42 @@ class Classroom {
     {
         return $this->array_users;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_class;
+
+
+    /**
+     * Add array_class
+     *
+     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass
+     * @return Classroom
+     */
+    public function addArrayClass(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass)
+    {
+        $this->array_class[] = $arrayClass;
+
+        return $this;
+    }
+
+    /**
+     * Remove array_class
+     *
+     * @param \Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass
+     */
+    public function removeArrayClass(\Quizz\QuizzBundle\Entity\classHasQuizz $arrayClass)
+    {
+        $this->array_class->removeElement($arrayClass);
+    }
+
+    /**
+     * Get array_class
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArrayClass()
+    {
+        return $this->array_class;
+    }
 }

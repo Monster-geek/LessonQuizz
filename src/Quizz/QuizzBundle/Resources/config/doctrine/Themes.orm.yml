@@ -9,14 +9,13 @@ Quizz\QuizzBundle\Entity\Themes:
         name:
             type: string
             length: 180
-        desc:
+        description:
             type: string
             lenght: 320
     oneToMany:
-            classHasQuizz:
+            array_theme:
                 targetEntity: classHasQuizz
-                mappedBy: idtheme
-    oneToMany:
-            Quizz:
+                mappedBy: fk_idtheme
+            array_quizz:
                 targetEntity: Quizz
-                mappedBy: id
+                mappedBy: fk_idtheme

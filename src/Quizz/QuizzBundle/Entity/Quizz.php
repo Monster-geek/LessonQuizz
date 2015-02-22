@@ -168,4 +168,32 @@ class Quizz {
     {
         return $this->idtheme;
     }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Themes
+     */
+    private $fk_idtheme;
+
+
+    /**
+     * Set fk_idtheme
+     *
+     * @param \Quizz\QuizzBundle\Entity\Themes $fkIdtheme
+     * @return Quizz
+     */
+    public function setFkIdtheme(\Quizz\QuizzBundle\Entity\Themes $fkIdtheme = null)
+    {
+        $this->fk_idtheme = $fkIdtheme;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idtheme
+     *
+     * @return \Quizz\QuizzBundle\Entity\Themes 
+     */
+    public function getFkIdtheme()
+    {
+        return $this->fk_idtheme;
+    }
 }

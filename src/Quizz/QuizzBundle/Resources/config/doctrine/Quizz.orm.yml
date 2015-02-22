@@ -16,9 +16,9 @@ Quizz\QuizzBundle\Entity\Quizz:
             type: integer
             length: 10
     manyToOne:
-            idtheme:
+            fk_idtheme:
                 targetEntity: Themes
-                inversedBy: id
+                inversedBy: array_quizz
                 joinColumn:
                     name: idtheme
                     referencedColumnName: id
