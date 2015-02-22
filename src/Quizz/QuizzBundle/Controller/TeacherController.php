@@ -5,6 +5,7 @@ namespace Quizz\QuizzBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Quizz\QuizzBundle\Entity\Classroom;
 use Quizz\QuizzBundle\Entity\Users;
+use Quizz\QuizzBundle\Entity\Themes;
 use Symfony\Component\HttpFoundation\Request;
 
 class TeacherController extends Controller {
@@ -104,6 +105,7 @@ class TeacherController extends Controller {
                 $em->flush();
             }
 
+            // TODO : Why make a redirection ? Just create a parm to display in the template !
             // Will redirect on the sucess page and display some usefull params like the passwords and the final username.
             $param = array('password'=>$password , 'username' => $username , 'Sucess' => 'OK');
             return $this->redirect($this->generateUrl('teacher_addstudent',$param));
@@ -195,4 +197,30 @@ class TeacherController extends Controller {
         $current_user = $this->get('security.context')->getToken()->getUser();
         return $this->render('QuizzQuizzBundle:Front:QuizzSum.html.twig', array('user'=>$current_user));
     }
-} 
+
+    public function addThemeAction(Request $request)
+    {
+
+        $newtheme = new Themes();
+
+        $form = $this->createFormBuilder($newtheme)
+            ->setAction($this->generateUrl('teacher_addtheme'))
+            ->setMethod('POST')
+            ->add('name', 'text', array('attr' => array('class' => 'form-control' , 'placeholder' => 'Nom du thème')))
+            ->add('desc' , 'textarea' ,array('attr' => array('class' => 'form-control' , 'placeholder' => 'Courte description du thème.')))
+            ->add('classHasQuizz','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
+                                                   'property' => 'name',
+                                                   'multiple' => true,
+                                                   'expanded' => true))
+            ->add('Ajout' , 'submit' , array('attr'=>array('class'=> 'btn btn-default')))
+            ->getForm();
+
+        //Catch the subit of the form
+        $form->handleRequest($request);
+
+
+
+        $current_user = $this->get('security.context')->getToken()->getUser();
+        return $this->render('QuizzQuizzBundle:Teacher:AddTheme.html.twig',array('user'=>$current_user , 'form'=>$form->createView()));
+    }
+}

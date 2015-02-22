@@ -12,49 +12,10 @@
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu message-dropdown">
-                <li class="message-preview">
-                    <a href="#">
-                        <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                            <div class="media-body">
-                                <h5 class="media-heading">
-                                    <strong>Jean BENOIT</strong>
-                                </h5>
-                                <p class="small text-muted"><i class="fa fa-clock-o"></i> Hier à 16:32 </p>
-                                <p>Salut , tu as le cour sur les contrats de ...</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="message-footer">
-                    <a href="#">Lire tout les messages.</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-            <ul class="dropdown-menu alert-dropdown">
-                <li>
-                    <a href="#">Nom de l'alerte <span class="label label-default">Badge d'alerte</span></a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#">Tout voir.</a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ user.name }} <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li>
                     <a href="#"><i class="fa fa-fw fa-user"></i> Profil</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-envelope"></i> Boite de réception</a>
                 </li>
                 <li class="divider"></li>
                 <li>
@@ -69,13 +30,6 @@
             <li>
                 <a href="{{ path('home_login') }}"><i class="fa fa-fw fa-dashboard"></i> Acceuil</a>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-envelope"></i> Messagerie</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Statistiques</a>
-            </li>
-
             {% if is_granted('ROLE_TEACHER') %}
                 <li>
                     <a href="{{ path('teacher_quizzsummary') }}"><i class="fa fa-fw fa-home "></i> Sommaire des QCM</a>
@@ -104,7 +58,11 @@
             </li>
 
             <li>
-                <a href="{{ path('teacher_addquizz') }}"><i class="fa fa-fw fa-plus-square"></i>Ajouter un QCM</a>
+                <a href="{{ path('teacher_addquizz') }}"><i class="fa fa-fw fa-plus-square"></i>Ajouter un Thème</a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-fw fa-pencil"></i> Editer un thème </a>
             </li>
 
             {% endif %}

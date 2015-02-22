@@ -48,9 +48,9 @@ teacher_addclassroom:
     path:     /teacher/addclassroom
     defaults: { _controller: QuizzQuizzBundle:Teacher:addClassroom }
 
-teacher_addquizz:
-    path:     /teacher/addquizz
-    defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
+teacher_addtheme:
+    path:     /teacher/addtheme
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addTheme }
 
 teacher_quizzsummary:
     path:     /teacher/quizzsummary

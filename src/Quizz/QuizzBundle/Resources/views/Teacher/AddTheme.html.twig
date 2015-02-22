@@ -15,32 +15,21 @@
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-dashboard"></i>  <a href="#">Acceuil</a>
+                    <i class="fa fa-dashboard"></i>  <a href="{{ path('teacher_home') }}">Acceuil</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Sommaire des quizz
+                    <i class="fa fa-file"></i> Ajout d'un Thème
                 </li>
             </ol>
         </div>
     </div>
     <!-- /.row -->
 
-    <!-- Structure explanation : 3 blocs per line, class="col-lg-4". 1 bloc = 1 quizz  -->
-
-    <!-- -->
     <div class="row">
 
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#" ><div class="panel-title">Test</div></a>
-                </div>
-                <div class="panel-body">
-                    Demo
-                </div>
-            </div>
+        <div class="col-lg-3">
+            {{ form(form) }}
         </div>
-
 
     </div>
     <!-- /.row -->
