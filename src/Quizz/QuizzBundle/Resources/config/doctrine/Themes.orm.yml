@@ -9,6 +9,7 @@ Quizz\QuizzBundle\Entity\Themes:
         name:
             type: string
             length: 180
+            unique: true
         description:
             type: string
             lenght: 320
@@ -16,15 +17,3 @@ Quizz\QuizzBundle\Entity\Themes:
             array_quizz:
                 targetEntity: Quizz
                 mappedBy: fk_idtheme
-    manyToMany:
-        groups:
-            targetEntity: Classroom
-            inversedBy: classrooms
-            joinTable:
-                name: classHasTheme
-                joinColumns:
-                  theme_id:
-                    referencedColumnName: id
-                inverseJoinColumns:
-                  classroom_id:
-                    referencedColumnName: id

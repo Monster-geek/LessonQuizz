@@ -18,31 +18,24 @@
                     <i class="fa fa-dashboard"></i>  <a href="#">Acceuil</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Sommaire des quizz
+                    <i class="fa fa-file"></i> Vue globale des Thèmes
                 </li>
             </ol>
         </div>
     </div>
     <!-- /.row -->
 
-    <!-- Structure explanation : 3 blocs per line, class="col-lg-4". 1 bloc = 1 quizz  -->
-
-    <!-- -->
+    <!-- Quick View Bare -->
     <div class="row">
 
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#" ><div class="panel-title">Test</div></a>
-                </div>
-                <div class="panel-body">
-                    Demo
+        {% for theme in themes %}
+            <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{ theme.name }}</div>
+                    <div class="panel-body">{{ theme.description }}</div>
                 </div>
             </div>
-        </div>
-
-
-
+        {% endfor %}
 
     </div>
     <!-- /.row -->

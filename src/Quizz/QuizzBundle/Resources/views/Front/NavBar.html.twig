@@ -58,11 +58,21 @@
             </li>
 
             <li>
-                <a href="{{ path('teacher_addquizz') }}"><i class="fa fa-fw fa-plus-square"></i>Ajouter un Thème</a>
+                <a href="{{ path('teacher_addtheme') }}"><i class="fa fa-fw fa-plus-square"></i>Ajouter un Thème</a>
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-fw fa-pencil"></i> Editer un thème </a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-pencil"></i> Editer un thème <i class="fa fa-fw fa-caret-down"></i></a>
+                <ul id="demo" class="collapse">
+
+                    <li>
+                        <a href="#">QCM 1</a>
+                    </li>
+
+                    <li>
+                        <a href="#">QCM 2</a>
+                    </li>
+                </ul>
             </li>
 
             {% endif %}

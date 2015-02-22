@@ -91,6 +91,7 @@ class Classroom {
         return $this->array_users;
     }
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -103,7 +104,7 @@ class Classroom {
      * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
      * @return Classroom
      */
-    public function addClassroom(Themes $classrooms)
+    public function addClassroom(\Quizz\QuizzBundle\Entity\Themes $classrooms)
     {
         $this->classrooms[] = $classrooms;
 
@@ -115,7 +116,7 @@ class Classroom {
      *
      * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
      */
-    public function removeClassroom(Themes $classrooms)
+    public function removeClassroom(\Quizz\QuizzBundle\Entity\Themes $classrooms)
     {
         $this->classrooms->removeElement($classrooms);
     }

@@ -13,7 +13,3 @@ Quizz\QuizzBundle\Entity\Classroom:
             array_users:
                 targetEntity: Users
                 mappedBy: fk_idclass
-    manyToMany:
-        classrooms:
-          targetEntity: Themes
-          mappedBy: groups

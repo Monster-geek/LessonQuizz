@@ -8,6 +8,8 @@ use Quizz\QuizzBundle\Entity\Users;
 use Quizz\QuizzBundle\Entity\Themes;
 use Symfony\Component\HttpFoundation\Request;
 
+use Quizz\QuizzBundle\Entity\classHasTheme;
+
 class TeacherController extends Controller {
 
     public function indexAction()
@@ -221,8 +223,34 @@ class TeacherController extends Controller {
 
         if($form->isValid())
         {
+            // Persist the theme in database. It will generate is id.
+            // We can find it back by the name.
             $em = $this->getDoctrine()->getManager();
             $em->persist($newtheme);
+            $em->flush();
+
+            //We get back the Id now
+            $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+            $current_theme = $db_theme->findBy(array('name' => $newtheme->getName()));
+
+            // We get an array of selected class to give access to the theme
+            $array_classroom = $newtheme->getGroups();
+
+            // We need to build a new instance of our rescue entity
+            $assocThemeClass = new classHasTheme();
+
+            foreach($array_classroom as $a){
+
+                $assocThemeClass->setClassId($a->getId());
+                $assocThemeClass->setThemeId($current_theme[0]->getId());
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($assocThemeClass);
+
+                $assocThemeClass = new classHasTheme();
+
+            }
             $em->flush();
         }
 

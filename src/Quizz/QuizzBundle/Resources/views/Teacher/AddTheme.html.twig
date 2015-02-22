@@ -28,7 +28,23 @@
     <div class="row">
 
         <div class="col-lg-3">
-            {{ form(form) }}
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <label>Nom du thème</label>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+            <br />
+            <label>Description</label>
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description) }}
+            <br />
+            <label>Cochez les classe ayant accés à ce thème :</label>
+            {{ form_errors(form.groups) }}
+            {{ form_widget(form.groups) }}
+            <br />
+            {{ form_widget(form.Ajout) }}
+            {{ form_end(form) }}
         </div>
 
     </div>
