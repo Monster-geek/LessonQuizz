@@ -196,4 +196,32 @@ class Quizz {
     {
         return $this->fk_idtheme;
     }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Levels
+     */
+    private $fk_idlevel;
+
+
+    /**
+     * Set fk_idlevel
+     *
+     * @param \Quizz\QuizzBundle\Entity\Levels $fkIdlevel
+     * @return Quizz
+     */
+    public function setFkIdlevel(\Quizz\QuizzBundle\Entity\Levels $fkIdlevel = null)
+    {
+        $this->fk_idlevel = $fkIdlevel;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idlevel
+     *
+     * @return \Quizz\QuizzBundle\Entity\Levels 
+     */
+    public function getFkIdlevel()
+    {
+        return $this->fk_idlevel;
+    }
 }

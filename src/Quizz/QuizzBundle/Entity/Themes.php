@@ -153,4 +153,42 @@ class Themes {
     {
         return $this->groups;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_theme;
+
+
+    /**
+     * Add array_theme
+     *
+     * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
+     * @return Themes
+     */
+    public function addArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
+    {
+        $this->array_theme[] = $arrayTheme;
+
+        return $this;
+    }
+
+    /**
+     * Remove array_theme
+     *
+     * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
+     */
+    public function removeArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
+    {
+        $this->array_theme->removeElement($arrayTheme);
+    }
+
+    /**
+     * Get array_theme
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArrayTheme()
+    {
+        return $this->array_theme;
+    }
 }

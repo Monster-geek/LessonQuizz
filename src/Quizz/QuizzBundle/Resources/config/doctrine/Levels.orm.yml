@@ -1,28 +1,25 @@
-Quizz\QuizzBundle\Entity\Quizz:
+Quizz\QuizzBundle\Entity\Levels:
     type: entity
-    table: quizz
+    table: levels
     id:
         id:
             type: integer
             generator: { strategy: AUTO }
     fields:
-        title:
+        name:
             type: string
             length: 180
         description:
             type: string
-            length: 320
-        level:
-            type: integer
-            length: 10
+            lenght: 320
     manyToOne:
-            fk_idlevel:
-                targetEntity: Levels
-                inversedBy: array_quizz
+            fk_idtheme:
+                targetEntity: Themes
+                inversedBy: array_levels
                 joinColumn:
                     name: idtheme
                     referencedColumnName: id
     oneToMany:
-        Questions:
-            targetEntity: Questions
-            mappedBy: id
+            array_quizz:
+                targetEntity: Quizz
+                mappedBy: fk_idlevel
