@@ -211,13 +211,13 @@ class TeacherController extends Controller {
                                                                                      'error'=>$array_error));
     }
 
-    public function quizzSummaryAction()
+    public function themeSummaryAction()
     {
         $current_user = $this->get('security.context')->getToken()->getUser();
 
         // Here we don't nee to load Theme by classroom. Teacher can see all Themes.
         $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
-        $all_theme = $db_theme->findAll();
+        $all_theme = $db_theme->findBy(array('fk_autorid'=>$current_user));
 
         // we'll make it simple for display in template
         foreach($all_theme as $t)
@@ -225,7 +225,7 @@ class TeacherController extends Controller {
             $display_array[] = array('name'=>$t->getName(), 'description'=>$t->getDescription());
         }
 
-        return $this->render('QuizzQuizzBundle:Front:QuizzSum.html.twig', array('user'=>$current_user , 'themes'=>$display_array));
+        return $this->render('QuizzQuizzBundle:Front:ThemeSum.html.twig', array('user'=>$current_user , 'themes'=>$display_array));
     }
 
     public function addThemeAction(Request $request)

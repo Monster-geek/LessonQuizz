@@ -165,7 +165,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
      * @return Themes
      */
-    public function addArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
+    public function addArrayTheme(Levels $arrayTheme)
     {
         $this->array_theme[] = $arrayTheme;
 
@@ -177,7 +177,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
      */
-    public function removeArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
+    public function removeArrayTheme(Levels $arrayTheme)
     {
         $this->array_theme->removeElement($arrayTheme);
     }
@@ -203,7 +203,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Users $fkAutorid
      * @return Themes
      */
-    public function setFkAutorid(\Quizz\QuizzBundle\Entity\Users $fkAutorid = null)
+    public function setFkAutorid(Users $fkAutorid = null)
     {
         $this->fk_autorid = $fkAutorid;
 
