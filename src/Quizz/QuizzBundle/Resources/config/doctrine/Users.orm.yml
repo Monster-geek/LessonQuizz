@@ -35,3 +35,7 @@ Quizz\QuizzBundle\Entity\Users:
             joinColumn:
                 name: idclass
                 referencedColumnName: id
+    oneToMany:
+        array_autors:
+            targetEntity: Themes
+            mappedBy: fk_autorid

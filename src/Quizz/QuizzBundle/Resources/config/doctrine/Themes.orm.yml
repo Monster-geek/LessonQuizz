@@ -17,3 +17,10 @@ Quizz\QuizzBundle\Entity\Themes:
             array_theme:
                 targetEntity: Levels
                 mappedBy: fk_idtheme
+    manyToOne:
+            fk_autorid:
+                targetEntity: Users
+                inversedBy: array_autors
+                joinColumn:
+                    name: idautors
+                    referencedColumnName: id

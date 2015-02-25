@@ -302,4 +302,42 @@ class Users implements UserInterface , \Serializable{
     {
         return $this->fk_idclass;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_autors;
+
+
+    /**
+     * Add array_autors
+     *
+     * @param \Quizz\QuizzBundle\Entity\Themes $arrayAutors
+     * @return Users
+     */
+    public function addArrayAutor(\Quizz\QuizzBundle\Entity\Themes $arrayAutors)
+    {
+        $this->array_autors[] = $arrayAutors;
+
+        return $this;
+    }
+
+    /**
+     * Remove array_autors
+     *
+     * @param \Quizz\QuizzBundle\Entity\Themes $arrayAutors
+     */
+    public function removeArrayAutor(\Quizz\QuizzBundle\Entity\Themes $arrayAutors)
+    {
+        $this->array_autors->removeElement($arrayAutors);
+    }
+
+    /**
+     * Get array_autors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArrayAutors()
+    {
+        return $this->array_autors;
+    }
 }

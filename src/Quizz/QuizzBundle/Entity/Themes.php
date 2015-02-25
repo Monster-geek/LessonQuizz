@@ -191,4 +191,32 @@ class Themes {
     {
         return $this->array_theme;
     }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Users
+     */
+    private $fk_autorid;
+
+
+    /**
+     * Set fk_autorid
+     *
+     * @param \Quizz\QuizzBundle\Entity\Users $fkAutorid
+     * @return Themes
+     */
+    public function setFkAutorid(\Quizz\QuizzBundle\Entity\Users $fkAutorid = null)
+    {
+        $this->fk_autorid = $fkAutorid;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_autorid
+     *
+     * @return \Quizz\QuizzBundle\Entity\Users 
+     */
+    public function getFkAutorid()
+    {
+        return $this->fk_autorid;
+    }
 }
