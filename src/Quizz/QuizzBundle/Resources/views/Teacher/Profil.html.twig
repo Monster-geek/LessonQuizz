@@ -18,7 +18,7 @@
                     <i class="fa fa-dashboard"></i>  <a href="{{ path('teacher_home') }}">Acceuil</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Ajout d'une classe
+                    <i class="fa fa-file"></i> Profil
                 </li>
             </ol>
         </div>
@@ -63,24 +63,6 @@
             {{ form_end(form) }}
         </div>
 
-
-        <div class="col-lg-2">
-            <table class="table">
-                <caption> Recaptulatif des classes .</caption>
-                <thead>
-                    <tr>
-                        <th>Libélé</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for class in listclass %}
-                    <tr>
-                        <td>{{ class }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
     </div>
     <!-- /.row -->
 

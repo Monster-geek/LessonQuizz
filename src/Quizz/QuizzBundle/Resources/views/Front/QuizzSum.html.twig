@@ -30,19 +30,14 @@
     <!-- -->
     <div class="row">
 
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a href="#" ><div class="panel-title">Test</div></a>
-                </div>
-                <div class="panel-body">
-                    Demo
+        {% for theme in themes %}
+            <div class="col-lg-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{ theme.name }}</div>
+                    <div class="panel-body">{{ theme.description }}</div>
                 </div>
             </div>
-        </div>
-
-
-
+        {% endfor %}
 
     </div>
     <!-- /.row -->

@@ -15,7 +15,37 @@ class TeacherController extends Controller {
     public function indexAction()
     {
         $current_user = $this->get('security.context')->getToken()->getUser();
-        return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig', array('user'=>$current_user));
+
+        // Count theme
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $all_theme = $db_theme->findAll();
+        $nb_theme = 0;
+        foreach($all_theme as $t)
+        {
+            $nb_theme++;
+        }
+        // Count Student
+        $db_student = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Users');
+        $all_student = $db_student->findBy(array('roles'=>'ROLE_STUDENT'));
+        $nb_student = 0;
+        foreach($all_student as $s)
+        {
+            $nb_student++;
+        }
+        //Count Classroom
+        $db_classroom = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Classroom');
+        $all_classroom = $db_classroom->findAll();
+        $nb_classroom = 0;
+        foreach($all_classroom as $c)
+        {
+            $nb_classroom++;
+        }
+
+
+        return $this->render('QuizzQuizzBundle:Teacher:Home.html.twig', array('user'=>$current_user,
+                                                                              'nbtheme'=>$nb_theme,
+                                                                              'nbstudent'=>$nb_student ,
+                                                                              'nbclassroom'=>$nb_classroom));
     }
 
     public function addStudentAction(Request $request)
@@ -123,23 +153,8 @@ class TeacherController extends Controller {
 
     }
 
-    // TODO : Improve the error display.
     public function addClassroomAction(Request $request)
     {
-
-        // If we have some GET parameters
-        $add_sucess = $request->query->get('error');
-        if($add_sucess == true)
-        {
-            $allow_box = true;
-            $classroom_info = array('classroom'=>$request->query->get('name'));
-        }
-        else
-        {
-            $allow_box = false;
-            $classroom_info = array('');
-        }
-
         $classroom = new Classroom();
 
         $form = $this->createFormBuilder($classroom)
@@ -150,6 +165,8 @@ class TeacherController extends Controller {
             ->getForm();
 
         $form->handleRequest($request);
+
+        $array_error = false;
 
         if ($form->isValid()) {
 
@@ -162,17 +179,18 @@ class TeacherController extends Controller {
             // If the check is ok, it's cool . If not we show an error.
             if(!$check)
             {
-                $param = array('error' => false, 'name' => $name);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($classroom);
                 $em->flush();
+
+                // Define the param to tell it's ok.
+                $array_error = array('code'=> '0', 'msg'=>'Classe ajouté avec succès.');
             }
             else
             {
-                $param = array('error'=> true , 'name' => $name);
+                // We have an error. The classroom already exist
+                $array_error = array('code'=>'1' , 'msg'=>'Cette classe existe déjà dans la base de données !');
             }
-
-            return $this->redirect($this->generateUrl('teacher_addclassroom',$param));
         }
 
         // Will load all the class fo display.
@@ -189,15 +207,25 @@ class TeacherController extends Controller {
 
         return $this->render('QuizzQuizzBundle:Teacher:AddClassroom.html.twig',array('user'=>$current_user,
                                                                                      'form' => $form->createView(),
-                                                                                     'add_box' => $allow_box,
-                                                                                     'result' => $classroom_info,
-                                                                                     'debug' => $array_class));
+                                                                                     'listclass' => $array_class,
+                                                                                     'error'=>$array_error));
     }
 
-    public function quizzSummaryAction(Request $request)
+    public function quizzSummaryAction()
     {
         $current_user = $this->get('security.context')->getToken()->getUser();
-        return $this->render('QuizzQuizzBundle:Front:QuizzSum.html.twig', array('user'=>$current_user));
+
+        // Here we don't nee to load Theme by classroom. Teacher can see all Themes.
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $all_theme = $db_theme->findAll();
+
+        // we'll make it simple for display in template
+        foreach($all_theme as $t)
+        {
+            $display_array[] = array('name'=>$t->getName(), 'description'=>$t->getDescription());
+        }
+
+        return $this->render('QuizzQuizzBundle:Front:QuizzSum.html.twig', array('user'=>$current_user , 'themes'=>$display_array));
     }
 
     public function addThemeAction(Request $request)

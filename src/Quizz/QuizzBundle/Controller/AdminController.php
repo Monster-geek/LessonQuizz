@@ -14,7 +14,45 @@ class AdminController extends Controller {
     {
         $current_user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('QuizzQuizzBundle:Front:TestHome.html.twig', array('user'=>$current_user));
+        // Count theme
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $all_theme = $db_theme->findAll();
+        $nb_theme = 0;
+        foreach($all_theme as $t)
+        {
+            $nb_theme++;
+        }
+        // Count Student && teachers
+        $db_student = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Users');
+        $all_student = $db_student->findAll();
+        $nb_student = 0;
+        $nb_teacher = 0;
+        foreach($all_student as $s)
+        {
+            if($s->getRoles()[0] == 'ROLE_STUDENT')
+            {
+                $nb_student++;
+            }
+            elseif($s->getRoles()[0] == 'ROLE_TEACHER')
+            {
+                $nb_teacher++;
+            }
+
+        }
+        //Count Classroom
+        $db_classroom = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Classroom');
+        $all_classroom = $db_classroom->findAll();
+        $nb_classroom = 0;
+        foreach($all_classroom as $c)
+        {
+            $nb_classroom++;
+        }
+
+        return $this->render('QuizzQuizzBundle:Admin:Home.html.twig', array('user'=>$current_user,
+                                                                                'nbtheme'=>$nb_theme,
+                                                                                'nbstudent'=>$nb_student ,
+                                                                                'nbclassroom'=>$nb_classroom ,
+                                                                                'nbteacher'=>$nb_teacher));
     }
 
     public function addTeacherAction(Request $request)
@@ -112,7 +150,7 @@ class AdminController extends Controller {
 
         $current_user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('QuizzQuizzBundle:Admin:Teacher.html.twig', array('user'=>$current_user,
+        return $this->render('QuizzQuizzBundle:Admin:AddTeacher.html.twig', array('user'=>$current_user,
                                                                                     'form' => $form->createView(),
                                                                                     'add_box' =>$allow_box,
                                                                                     'login_info' => $login_info,
