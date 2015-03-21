@@ -32,9 +32,11 @@
 
         {% for theme in themes %}
             <div class="col-lg-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">{{ theme.name }}</div>
-                    <div class="panel-body">{{ theme.description }}</div>
+                <div class="list-group">
+                    <a href="{{ theme.levelLink }}" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ theme.name }}</h4>
+                        <p class="list-group-item-text">{{ theme.description }}</p>
+                    </a>
                 </div>
             </div>
         {% endfor %}

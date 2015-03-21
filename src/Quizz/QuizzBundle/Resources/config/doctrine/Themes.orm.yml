@@ -24,3 +24,11 @@ Quizz\QuizzBundle\Entity\Themes:
                 joinColumn:
                     name: idautors
                     referencedColumnName: id
+    oneToMany:
+            array_levels:
+                targetEntity: Quizz
+                mappedBy: fk_idlevel
+    manyToMany:
+        classrooms_array:
+          targetEntity: Classroom
+          mappedBy: themes_array

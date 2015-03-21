@@ -18,7 +18,7 @@ class TeacherController extends Controller {
 
         // Count theme
         $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
-        $all_theme = $db_theme->findAll();
+        $all_theme = $db_theme->findBy(array('fk_autorid'=>$current_user));
         $nb_theme = 0;
         foreach($all_theme as $t)
         {
@@ -211,23 +211,6 @@ class TeacherController extends Controller {
                                                                                      'error'=>$array_error));
     }
 
-    public function themeSummaryAction()
-    {
-        $current_user = $this->get('security.context')->getToken()->getUser();
-
-        // Here we don't nee to load Theme by classroom. Teacher can see all Themes.
-        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
-        $all_theme = $db_theme->findBy(array('fk_autorid'=>$current_user));
-
-        // we'll make it simple for display in template
-        foreach($all_theme as $t)
-        {
-            $display_array[] = array('name'=>$t->getName(), 'description'=>$t->getDescription());
-        }
-
-        return $this->render('QuizzQuizzBundle:Front:ThemeSum.html.twig', array('user'=>$current_user , 'themes'=>$display_array));
-    }
-
     public function addThemeAction(Request $request)
     {
 
@@ -236,12 +219,14 @@ class TeacherController extends Controller {
         $form = $this->createFormBuilder($newtheme)
             ->setAction($this->generateUrl('teacher_addtheme'))
             ->setMethod('POST')
-            ->add('name', 'text', array('attr' => array('class' => 'form-control' , 'placeholder' => 'Nom du thème')))
-            ->add('description' , 'textarea' ,array('attr' => array('class' => 'form-control' , 'placeholder' => 'Courte description du thème.')))
-            ->add('groups','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
-                                                   'property' => 'name',
-                                                   'multiple' => true,
-                                                   'expanded' => true))
+            ->add('name', 'text', array('attr' => array('class' => 'form-control' ,
+                                                        'placeholder' => 'Nom du thème')))
+            ->add('description' , 'textarea' ,array('attr' => array('class' => 'form-control' ,
+                                                                    'placeholder' => 'Courte description du thème.')))
+            ->add('classrooms_array','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
+                                            'property' => 'name',
+                                            'multiple' => true,
+                                            'expanded' => true))
             ->add('Ajout' , 'submit' , array('attr'=>array('class'=> 'btn btn-default')))
             ->getForm();
 
@@ -251,8 +236,16 @@ class TeacherController extends Controller {
 
         if($form->isValid())
         {
+
+            $author_id = $current_user = $this->get('security.context')->getToken()->getUser();
+
+            $newtheme->setFkAutorid($author_id);
+
+            dump($newtheme);
+
             // Persist the theme in database. It will generate is id.
             // We can find it back by the name.
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($newtheme);
             $em->flush();
@@ -262,7 +255,7 @@ class TeacherController extends Controller {
             $current_theme = $db_theme->findBy(array('name' => $newtheme->getName()));
 
             // We get an array of selected class to give access to the theme
-            $array_classroom = $newtheme->getGroups();
+            $array_classroom = $newtheme->getClassroomsArray();
 
             // We need to build a new instance of our rescue entity
             $assocThemeClass = new classHasTheme();
@@ -280,12 +273,67 @@ class TeacherController extends Controller {
 
             }
             $em->flush();
+
         }
 
 
         $current_user = $this->get('security.context')->getToken()->getUser();
         return $this->render('QuizzQuizzBundle:Teacher:AddTheme.html.twig',array('user'=>$current_user ,
                                                                                  'form'=>$form->createView()
-                                                                                 ));
+        ));
+    }
+
+    public function addLevelsAction(Request $request)
+    {
+
+    }
+
+    public function addQuizzAction(Request $request)
+    {
+
+    }
+
+    public function themeSummaryAction()
+    {
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+        // Here we don't nee to load Theme by classroom. Teacher can see all Themes.
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $all_theme = $db_theme->findBy(array('fk_autorid'=>$current_user));
+
+        // we'll make it simple for display in template
+        $display_array = array();
+        foreach($all_theme as $t)
+        {
+            $display_array[] = array('name'=>$t->getName(),
+                                     'description'=>$t->getDescription(),
+                                     'levelLink'=>$this->generateUrl('teacher_levelsum',array('theme'=>$t->getName())));
+
+            dump($t->getName());
+        }
+
+        dump($display_array);
+
+
+        return $this->render('QuizzQuizzBundle:Teacher:ThemeSum.html.twig', array('user'=>$current_user,
+                                                                                'themes'=>$display_array));
+    }
+
+    public function showLevelsAction(Request $request)
+    {
+        // This function must call all the levels for the one theme.
+        // For teacher the view must contain one tool to add more level to the thème.
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+        return $this->render('QuizzQuizzBundle:Teacher:LevelSum.html.twig',array('user'=>$current_user));
+    }
+
+    public function showQuizzAction(Request $request)
+    {
+        // This function must call all the quizz for one level of a theme.
+        // This feature is only for teacher.
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+        return $this->render('QuizzQuizzBundle:Teacher:QuizzSum.html.twig',array('user'=>$current_user));
     }
 }

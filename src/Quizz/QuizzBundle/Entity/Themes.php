@@ -16,20 +16,25 @@ class Themes {
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $array_quizz;
+    private $array_theme;
+
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Users
+     */
+    private $fk_autorid;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $groups;
+    private $classrooms_array;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->array_quizz = new ArrayCollection();
-        $this->groups = new ArrayCollection();
+        $this->array_theme = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->classrooms_array = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -89,83 +94,12 @@ class Themes {
     }
 
     /**
-     * Add array_quizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\Quizz $arrayQuizz
-     * @return Themes
-     */
-    public function addArrayQuizz(Quizz $arrayQuizz)
-    {
-        $this->array_quizz[] = $arrayQuizz;
-
-        return $this;
-    }
-
-    /**
-     * Remove array_quizz
-     *
-     * @param \Quizz\QuizzBundle\Entity\Quizz $arrayQuizz
-     */
-    public function removeArrayQuizz(Quizz $arrayQuizz)
-    {
-        $this->array_quizz->removeElement($arrayQuizz);
-    }
-
-    /**
-     * Get array_quizz
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArrayQuizz()
-    {
-        return $this->array_quizz;
-    }
-
-    /**
-     * Add groups
-     *
-     * @param \Quizz\QuizzBundle\Entity\Classroom $groups
-     * @return Themes
-     */
-    public function addGroup(Classroom $groups)
-    {
-        $this->groups[] = $groups;
-
-        return $this;
-    }
-
-    /**
-     * Remove groups
-     *
-     * @param \Quizz\QuizzBundle\Entity\Classroom $groups
-     */
-    public function removeGroup(Classroom $groups)
-    {
-        $this->groups->removeElement($groups);
-    }
-
-    /**
-     * Get groups
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getGroups()
-    {
-        return $this->groups;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $array_theme;
-
-
-    /**
      * Add array_theme
      *
      * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
      * @return Themes
      */
-    public function addArrayTheme(Levels $arrayTheme)
+    public function addArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
     {
         $this->array_theme[] = $arrayTheme;
 
@@ -177,7 +111,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
      */
-    public function removeArrayTheme(Levels $arrayTheme)
+    public function removeArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
     {
         $this->array_theme->removeElement($arrayTheme);
     }
@@ -191,11 +125,6 @@ class Themes {
     {
         return $this->array_theme;
     }
-    /**
-     * @var \Quizz\QuizzBundle\Entity\Users
-     */
-    private $fk_autorid;
-
 
     /**
      * Set fk_autorid
@@ -203,7 +132,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Users $fkAutorid
      * @return Themes
      */
-    public function setFkAutorid(Users $fkAutorid = null)
+    public function setFkAutorid(\Quizz\QuizzBundle\Entity\Users $fkAutorid = null)
     {
         $this->fk_autorid = $fkAutorid;
 
@@ -218,5 +147,38 @@ class Themes {
     public function getFkAutorid()
     {
         return $this->fk_autorid;
+    }
+
+    /**
+     * Add classrooms_array
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $classroomsArray
+     * @return Themes
+     */
+    public function addClassroomsArray(\Quizz\QuizzBundle\Entity\Classroom $classroomsArray)
+    {
+        $this->classrooms_array[] = $classroomsArray;
+
+        return $this;
+    }
+
+    /**
+     * Remove classrooms_array
+     *
+     * @param \Quizz\QuizzBundle\Entity\Classroom $classroomsArray
+     */
+    public function removeClassroomsArray(\Quizz\QuizzBundle\Entity\Classroom $classroomsArray)
+    {
+        $this->classrooms_array->removeElement($classroomsArray);
+    }
+
+    /**
+     * Get classrooms_array
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClassroomsArray()
+    {
+        return $this->classrooms_array;
     }
 }

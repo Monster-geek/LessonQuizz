@@ -16,15 +16,16 @@ class Quizz {
 
     private $idclass;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $Questions;
 
     /**
-     * @var \Quizz\QuizzBundle\Entity\Themes
+     * @var \Quizz\QuizzBundle\Entity\Levels
      */
-    private $idtheme;
+    private $fk_idlevel;
 
     /**
      * Constructor
@@ -145,62 +146,6 @@ class Quizz {
     {
         return $this->Questions;
     }
-
-    /**
-     * Set idtheme
-     *
-     * @param \Quizz\QuizzBundle\Entity\Themes $idtheme
-     * @return Quizz
-     */
-    public function setIdtheme(\Quizz\QuizzBundle\Entity\Themes $idtheme = null)
-    {
-        $this->idtheme = $idtheme;
-
-        return $this;
-    }
-
-    /**
-     * Get idtheme
-     *
-     * @return \Quizz\QuizzBundle\Entity\Themes 
-     */
-    public function getIdtheme()
-    {
-        return $this->idtheme;
-    }
-    /**
-     * @var \Quizz\QuizzBundle\Entity\Themes
-     */
-    private $fk_idtheme;
-
-
-    /**
-     * Set fk_idtheme
-     *
-     * @param \Quizz\QuizzBundle\Entity\Themes $fkIdtheme
-     * @return Quizz
-     */
-    public function setFkIdtheme(\Quizz\QuizzBundle\Entity\Themes $fkIdtheme = null)
-    {
-        $this->fk_idtheme = $fkIdtheme;
-
-        return $this;
-    }
-
-    /**
-     * Get fk_idtheme
-     *
-     * @return \Quizz\QuizzBundle\Entity\Themes 
-     */
-    public function getFkIdtheme()
-    {
-        return $this->fk_idtheme;
-    }
-    /**
-     * @var \Quizz\QuizzBundle\Entity\Levels
-     */
-    private $fk_idlevel;
-
 
     /**
      * Set fk_idlevel

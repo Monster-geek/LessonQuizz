@@ -1,0 +1,11 @@
+Quizz\QuizzBundle\Entity\StudentLogs:
+    type: entity
+    table: studentlogs
+    id:
+        id_logs:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        type_log:
+            type: string
+            length: 20

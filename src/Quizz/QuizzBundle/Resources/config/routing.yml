@@ -40,10 +40,6 @@ teacher_addstudent:
     path:     /teacher/addstudent
     defaults: { _controller: QuizzQuizzBundle:Teacher:addStudent }
 
-teacher_addquizz:
-    path:     /teacher/addquizz
-    defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
-
 teacher_addclassroom:
     path:     /teacher/addclassroom
     defaults: { _controller: QuizzQuizzBundle:Teacher:addClassroom }
@@ -52,9 +48,21 @@ teacher_addtheme:
     path:     /teacher/addtheme
     defaults: { _controller: QuizzQuizzBundle:Teacher:addTheme }
 
-teacher_themesummary:
-    path:     /teacher/themesummary
+teacher_addquizz:
+    path:     /teacher/addquizz
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
+
+teacher_levelsum:
+    path:     /teacher/levels
+    defaults: { _controller: QuizzQuizzBundle:Teacher:showLevels }
+
+teacher_themesum:
+    path:     /teacher/themes
     defaults: { _controller: QuizzQuizzBundle:Teacher:themeSummary }
+
+teacher_quizzsum:
+    path:     /teacher/quizz
+    defaults: { _controller: QuizzQuizzBundle:Teacher:showQuizz }
 
 teacher_about:
     path:     /teacher/about
@@ -72,4 +80,3 @@ login_check:
 home_login:
     path:     /
     defaults: { _controller: QuizzQuizzBundle:Default:index }
-

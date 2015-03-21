@@ -13,3 +13,15 @@ Quizz\QuizzBundle\Entity\Classroom:
             array_users:
                 targetEntity: Users
                 mappedBy: fk_idclass
+    manyToMany:
+        themes_array:
+          targetEntity: Themes
+          inversedBy: classrooms_array
+          joinTable:
+            name: classroom_has_theme
+            joinColumns:
+              id_classroom:
+                referencedColumnName: id
+            inverseJoinColumns:
+              id_theme:
+                referencedColumnName: id

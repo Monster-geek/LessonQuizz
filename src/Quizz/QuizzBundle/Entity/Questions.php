@@ -12,6 +12,7 @@ class Questions {
 
     private $style;
 
+
     /**
      * @var \Quizz\QuizzBundle\Entity\Answers
      */

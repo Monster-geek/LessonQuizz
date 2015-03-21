@@ -11,11 +11,24 @@ class Levels {
     private $name;
 
     private $description;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_quizz;
+
     /**
      * @var \Quizz\QuizzBundle\Entity\Themes
      */
     private $fk_idtheme;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->array_quizz = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -74,41 +87,6 @@ class Levels {
     }
 
     /**
-     * Set fk_idtheme
-     *
-     * @param \Quizz\QuizzBundle\Entity\Themes $fkIdtheme
-     * @return Levels
-     */
-    public function setFkIdtheme(\Quizz\QuizzBundle\Entity\Themes $fkIdtheme = null)
-    {
-        $this->fk_idtheme = $fkIdtheme;
-
-        return $this;
-    }
-
-    /**
-     * Get fk_idtheme
-     *
-     * @return \Quizz\QuizzBundle\Entity\Themes 
-     */
-    public function getFkIdtheme()
-    {
-        return $this->fk_idtheme;
-    }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $array_quizz;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->array_quizz = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Add array_quizz
      *
      * @param \Quizz\QuizzBundle\Entity\Quizz $arrayQuizz
@@ -139,5 +117,28 @@ class Levels {
     public function getArrayQuizz()
     {
         return $this->array_quizz;
+    }
+
+    /**
+     * Set fk_idtheme
+     *
+     * @param \Quizz\QuizzBundle\Entity\Themes $fkIdtheme
+     * @return Levels
+     */
+    public function setFkIdtheme(\Quizz\QuizzBundle\Entity\Themes $fkIdtheme = null)
+    {
+        $this->fk_idtheme = $fkIdtheme;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_idtheme
+     *
+     * @return \Quizz\QuizzBundle\Entity\Themes 
+     */
+    public function getFkIdtheme()
+    {
+        return $this->fk_idtheme;
     }
 }

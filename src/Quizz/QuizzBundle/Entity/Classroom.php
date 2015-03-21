@@ -17,13 +17,18 @@ class Classroom {
     private $array_users;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $themes_array;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->array_users = new ArrayCollection();
+        $this->array_users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->themes_array = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -64,7 +69,7 @@ class Classroom {
      * @param \Quizz\QuizzBundle\Entity\Users $arrayUsers
      * @return Classroom
      */
-    public function addArrayUser(Users $arrayUsers)
+    public function addArrayUser(\Quizz\QuizzBundle\Entity\Users $arrayUsers)
     {
         $this->array_users[] = $arrayUsers;
 
@@ -76,7 +81,7 @@ class Classroom {
      *
      * @param \Quizz\QuizzBundle\Entity\Users $arrayUsers
      */
-    public function removeArrayUser(Users $arrayUsers)
+    public function removeArrayUser(\Quizz\QuizzBundle\Entity\Users $arrayUsers)
     {
         $this->array_users->removeElement($arrayUsers);
     }
@@ -91,43 +96,36 @@ class Classroom {
         return $this->array_users;
     }
 
-
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $classrooms;
-
-
-    /**
-     * Add classrooms
+     * Add themes_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
+     * @param \Quizz\QuizzBundle\Entity\Themes $themesArray
      * @return Classroom
      */
-    public function addClassroom(\Quizz\QuizzBundle\Entity\Themes $classrooms)
+    public function addThemesArray(\Quizz\QuizzBundle\Entity\Themes $themesArray)
     {
-        $this->classrooms[] = $classrooms;
+        $this->themes_array[] = $themesArray;
 
         return $this;
     }
 
     /**
-     * Remove classrooms
+     * Remove themes_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Themes $classrooms
+     * @param \Quizz\QuizzBundle\Entity\Themes $themesArray
      */
-    public function removeClassroom(\Quizz\QuizzBundle\Entity\Themes $classrooms)
+    public function removeThemesArray(\Quizz\QuizzBundle\Entity\Themes $themesArray)
     {
-        $this->classrooms->removeElement($classrooms);
+        $this->themes_array->removeElement($themesArray);
     }
 
     /**
-     * Get classrooms
+     * Get themes_array
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getClassrooms()
+    public function getThemesArray()
     {
-        return $this->classrooms;
+        return $this->themes_array;
     }
 }
