@@ -230,53 +230,47 @@ class TeacherController extends Controller {
             ->add('Ajout' , 'submit' , array('attr'=>array('class'=> 'btn btn-default')))
             ->getForm();
 
+        $array_error = false;
+
         //Catch the subit of the form
         $form->handleRequest($request);
-
-
         if($form->isValid())
         {
+            // Check the avaibility in the database.
+            $name = $newtheme->getName();
+            $db_themes = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+            $check = $db_themes->findBy(array('name'=>$name));
 
-            $author_id = $current_user = $this->get('security.context')->getToken()->getUser();
 
-            $newtheme->setFkAutorid($author_id);
 
-            // Persist the theme in database. It will generate is id.
-            // We can find it back by the name.
+            // If the check is ok, it's cool . If not we show an error.
+            if(!$check)
+            {
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newtheme);
-            $em->flush();
-
-            //We get back the Id now
-            $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
-            $current_theme = $db_theme->findBy(array('name' => $newtheme->getName()));
-
-            // We get an array of selected class to give access to the theme
-            $array_classroom = $newtheme->getArrayTheme();
-
-            // We need to build a new instance of our rescue entity
-            $assocThemeClass = new classHasTheme();
-
-            foreach($array_classroom as $a){
-
-                $assocThemeClass->setClassId($a->getId());
-                $assocThemeClass->setThemeId($current_theme[0]->getId());
-
+                $author_id = $current_user = $this->get('security.context')->getToken()->getUser();
+                $newtheme->setFkAutorid($author_id);
 
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($assocThemeClass);
+                $em->persist($newtheme);
+                $em->flush();
 
-                $assocThemeClass = new classHasTheme();
-
+                // Define the param to tell it's ok.
+                $array_error = array('code'=> '0', 'msg'=>'Théme ajouté avec succès.');
             }
-            $em->flush();
+            else
+            {
+                // We have an error. The classroom already exist
+                $array_error = array('code'=>'1' , 'msg'=>'Ce théme existe déjà dans la base de données !');
+            }
+
+
 
         }
 
 
         $current_user = $this->get('security.context')->getToken()->getUser();
         return $this->render('QuizzQuizzBundle:Teacher:AddTheme.html.twig',array('user'=>$current_user ,
+                                                                                 'error'=>$array_error,
                                                                                  'form'=>$form->createView()
         ));
     }
