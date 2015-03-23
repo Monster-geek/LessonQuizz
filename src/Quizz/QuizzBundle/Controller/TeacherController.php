@@ -223,7 +223,7 @@ class TeacherController extends Controller {
                                                         'placeholder' => 'Nom du thème')))
             ->add('description' , 'textarea' ,array('attr' => array('class' => 'form-control' ,
                                                                     'placeholder' => 'Courte description du thème.')))
-            ->add('classrooms_array','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
+            ->add('themes_array','entity' , array('class' => 'QuizzQuizzBundle:Classroom',
                                             'property' => 'name',
                                             'multiple' => true,
                                             'expanded' => true))
@@ -241,8 +241,6 @@ class TeacherController extends Controller {
 
             $newtheme->setFkAutorid($author_id);
 
-            dump($newtheme);
-
             // Persist the theme in database. It will generate is id.
             // We can find it back by the name.
 
@@ -255,7 +253,7 @@ class TeacherController extends Controller {
             $current_theme = $db_theme->findBy(array('name' => $newtheme->getName()));
 
             // We get an array of selected class to give access to the theme
-            $array_classroom = $newtheme->getClassroomsArray();
+            $array_classroom = $newtheme->getArrayTheme();
 
             // We need to build a new instance of our rescue entity
             $assocThemeClass = new classHasTheme();
@@ -308,11 +306,7 @@ class TeacherController extends Controller {
             $display_array[] = array('name'=>$t->getName(),
                                      'description'=>$t->getDescription(),
                                      'levelLink'=>$this->generateUrl('teacher_levelsum',array('theme'=>$t->getName())));
-
-            dump($t->getName());
         }
-
-        dump($display_array);
 
 
         return $this->render('QuizzQuizzBundle:Teacher:ThemeSum.html.twig', array('user'=>$current_user,

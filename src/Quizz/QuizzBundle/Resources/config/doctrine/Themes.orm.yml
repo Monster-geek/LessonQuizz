@@ -29,6 +29,14 @@ Quizz\QuizzBundle\Entity\Themes:
                 targetEntity: Quizz
                 mappedBy: fk_idlevel
     manyToMany:
-        classrooms_array:
-          targetEntity: Classroom
-          mappedBy: themes_array
+            themes_array:
+              targetEntity: Classroom
+              inversedBy: classrooms_array
+              joinTable:
+                name: classroom_has_theme
+                joinColumns:
+                  id_classroom:
+                    referencedColumnName: id
+                inverseJoinColumns:
+                  id_theme:
+                    referencedColumnName: id

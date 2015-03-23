@@ -26,7 +26,7 @@ class Themes {
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $classrooms_array;
+    private $themes_array;
 
     /**
      * Constructor
@@ -34,7 +34,7 @@ class Themes {
     public function __construct()
     {
         $this->array_theme = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->classrooms_array = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->themes_array = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -150,35 +150,35 @@ class Themes {
     }
 
     /**
-     * Add classrooms_array
+     * Add themes_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Classroom $classroomsArray
+     * @param \Quizz\QuizzBundle\Entity\Classroom $themesArray
      * @return Themes
      */
-    public function addClassroomsArray(\Quizz\QuizzBundle\Entity\Classroom $classroomsArray)
+    public function addThemesArray(\Quizz\QuizzBundle\Entity\Classroom $themesArray)
     {
-        $this->classrooms_array[] = $classroomsArray;
+        $this->themes_array[] = $themesArray;
 
         return $this;
     }
 
     /**
-     * Remove classrooms_array
+     * Remove themes_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Classroom $classroomsArray
+     * @param \Quizz\QuizzBundle\Entity\Classroom $themesArray
      */
-    public function removeClassroomsArray(\Quizz\QuizzBundle\Entity\Classroom $classroomsArray)
+    public function removeThemesArray(\Quizz\QuizzBundle\Entity\Classroom $themesArray)
     {
-        $this->classrooms_array->removeElement($classroomsArray);
+        $this->themes_array->removeElement($themesArray);
     }
 
     /**
-     * Get classrooms_array
+     * Get themes_array
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getClassroomsArray()
+    public function getThemesArray()
     {
-        return $this->classrooms_array;
+        return $this->themes_array;
     }
 }

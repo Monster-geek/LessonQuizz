@@ -11,6 +11,7 @@ class Classroom {
 
     private $name;
 
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -19,7 +20,7 @@ class Classroom {
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $themes_array;
+    private $classrooms_array;
 
     /**
      * Constructor
@@ -27,7 +28,7 @@ class Classroom {
     public function __construct()
     {
         $this->array_users = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->themes_array = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->classrooms_array = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -97,35 +98,35 @@ class Classroom {
     }
 
     /**
-     * Add themes_array
+     * Add classrooms_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Themes $themesArray
+     * @param \Quizz\QuizzBundle\Entity\Themes $classroomsArray
      * @return Classroom
      */
-    public function addThemesArray(\Quizz\QuizzBundle\Entity\Themes $themesArray)
+    public function addClassroomsArray(\Quizz\QuizzBundle\Entity\Themes $classroomsArray)
     {
-        $this->themes_array[] = $themesArray;
+        $this->classrooms_array[] = $classroomsArray;
 
         return $this;
     }
 
     /**
-     * Remove themes_array
+     * Remove classrooms_array
      *
-     * @param \Quizz\QuizzBundle\Entity\Themes $themesArray
+     * @param \Quizz\QuizzBundle\Entity\Themes $classroomsArray
      */
-    public function removeThemesArray(\Quizz\QuizzBundle\Entity\Themes $themesArray)
+    public function removeClassroomsArray(\Quizz\QuizzBundle\Entity\Themes $classroomsArray)
     {
-        $this->themes_array->removeElement($themesArray);
+        $this->classrooms_array->removeElement($classroomsArray);
     }
 
     /**
-     * Get themes_array
+     * Get classrooms_array
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getThemesArray()
+    public function getClassroomsArray()
     {
-        return $this->themes_array;
+        return $this->classrooms_array;
     }
 }
