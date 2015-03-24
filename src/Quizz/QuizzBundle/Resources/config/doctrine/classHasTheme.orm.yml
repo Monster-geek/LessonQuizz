@@ -1,8 +1,0 @@
-Quizz\QuizzBundle\Entity\classHasTheme:
-    type: entity
-    table: classHasTheme
-    id:
-        class_id:
-            type: integer
-        theme_id:
-            type: integer

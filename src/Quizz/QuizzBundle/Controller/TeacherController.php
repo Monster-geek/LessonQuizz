@@ -2,13 +2,12 @@
 
 namespace Quizz\QuizzBundle\Controller;
 
+use Quizz\QuizzBundle\Entity\Levels;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Quizz\QuizzBundle\Entity\Classroom;
 use Quizz\QuizzBundle\Entity\Users;
 use Quizz\QuizzBundle\Entity\Themes;
 use Symfony\Component\HttpFoundation\Request;
-
-use Quizz\QuizzBundle\Entity\classHasTheme;
 
 class TeacherController extends Controller {
 
@@ -275,8 +274,69 @@ class TeacherController extends Controller {
         ));
     }
 
-    public function addLevelsAction(Request $request)
+    public function addLevelAction($id_theme , Request $request)
     {
+        // This function allow a teacher to add a new level on a Theme
+        $current_user = $this->get('security.context')->getToken()->getUser();
+
+
+        // Check if the id of the theme is in the database (STAHP PLAYIN' WITH THE URL GD DAMN IT !)
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $current_theme = $db_theme->findBy(array('id'=>$id_theme));
+
+        if($current_theme)
+        {
+            $newlevel = new Levels();
+
+            $form = $this->createFormBuilder($newlevel)
+                ->setAction($this->generateUrl('teacher_addlevel',array('id_theme'=>$id_theme)))
+                ->setMethod('POST')
+                ->add('name', 'text', array('attr' => array('class' => 'form-control' ,
+                                                            'placeholder' => 'Nom du niveau')))
+                ->add('description' , 'textarea' ,array('attr' => array('class' => 'form-control' ,
+                                                                        'placeholder' => 'Courte description du niveau.')))
+                ->add('Ajout' , 'submit' , array('attr'=>array('class'=> 'btn btn-default')))
+                ->getForm();
+
+            $array_error = false;
+
+            //Catch the subit of the form
+            $form->handleRequest($request);
+            if($form->isValid())
+            {
+                // Check the avaibility in the database.
+                $name = $newlevel->getName();
+                $db_themes = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Levels');
+                $check = $db_themes->findBy(array('name'=>$name));
+
+                // If the check is ok, it's cool . If not we show an error.
+                if(!$check)
+                {
+
+                    $newlevel->setFkIdtheme($current_theme[0]);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($newlevel);
+                    $em->flush();
+
+                    // Define the param to tell it's ok.
+                    $array_error = array('code'=> '0', 'msg'=>'Niveau ajouté avec succès.');
+                }
+                else
+                {
+                    // We have an error. The classroom already exist
+                    $array_error = array('code'=>'1' , 'msg'=>'Ce niveau existe déjà dans la base de données !');
+                }
+
+            }
+
+            return $this->render('QuizzQuizzBundle:Teacher:AddLevel.html.twig',array('user'=>$current_user ,
+                                                                                     'error'=>$array_error,
+                                                                                     'form'=>$form->createView()));
+        }
+
+        // Demo View
+        return $this->render('QuizzQuizzBundle:Teacher:LevelSum.html.twig',array('user'=>$current_user, 'id_theme'=>$id_theme));
 
     }
 
@@ -297,9 +357,12 @@ class TeacherController extends Controller {
         $display_array = array();
         foreach($all_theme as $t)
         {
+            $levelLink = $this->generateUrl('teacher_levelsum',array('id_theme'=>$t->getId()));
+            //$levelLink .=  '/'.$t->getId();
+
             $display_array[] = array('name'=>$t->getName(),
                                      'description'=>$t->getDescription(),
-                                     'levelLink'=>$this->generateUrl('teacher_levelsum',array('theme'=>$t->getName())));
+                                     'levelLink'=>$levelLink);
         }
 
 
@@ -307,16 +370,47 @@ class TeacherController extends Controller {
                                                                                 'themes'=>$display_array));
     }
 
-    public function showLevelsAction(Request $request)
+    public function showLevelsAction($id_theme)
     {
         // This function must call all the levels for the one theme.
         // For teacher the view must contain one tool to add more level to the thème.
         $current_user = $this->get('security.context')->getToken()->getUser();
 
-        return $this->render('QuizzQuizzBundle:Teacher:LevelSum.html.twig',array('user'=>$current_user));
+
+        // Check if the id of the théme is in the database (STAHP PLAYIN' WITH THE URL GD DAMN IT !)
+        $db_theme = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Themes');
+        $current_theme = $db_theme->findBy(array('id'=>$id_theme));
+
+        $display_array= array();
+        $add_link = $this->generateUrl('teacher_addlevel',array("id_theme"=>$id_theme));
+        if($current_theme)
+        {
+
+            // we need to get all the level for this theme
+            $db_level = $this->getDoctrine()->getRepository('QuizzQuizzBundle:Levels');
+            $all_level = $db_level->findBy(array('fk_idtheme'=>$current_theme[0]->getId()));
+
+            // we'll make it simple for display in template
+            $display_array = array();
+            foreach($all_level as $l)
+            {
+                $levelLink = $this->generateUrl('teacher_quizzsum',array('id_level'=>$l->getId()));
+                //$levelLink .=  '/'.$t->getId();
+
+                $display_array[] = array('name'=>$l->getName(),
+                                         'description'=>$l->getDescription(),
+                                         'levelLink'=>$levelLink);
+            }
+        }
+
+        // Demo View
+        return $this->render('QuizzQuizzBundle:Teacher:LevelSum.html.twig',array('user'=>$current_user,
+                                                                                 'id_theme'=>$id_theme ,
+                                                                                 'level_array'=>$display_array ,
+                                                                                 'add_link'=>$add_link));
     }
 
-    public function showQuizzAction(Request $request)
+    public function showQuizzAction($id_level)
     {
         // This function must call all the quizz for one level of a theme.
         // This feature is only for teacher.

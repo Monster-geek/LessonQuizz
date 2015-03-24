@@ -1,0 +1,72 @@
+{% extends ':Front:tpl_home.html.twig' %}
+
+{% block NavBar %}
+    {% include 'QuizzQuizzBundle:Front:NavBar.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                {{ user.name }}
+                <small>{{ user.lastname }}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-dashboard"></i>  <a href="{{ path('teacher_home') }}">Acceuil</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-file"></i> Ajout d'un niveau
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+    <div class="row">
+
+        {% if error %}
+            {% if error.code == 0 %}
+                <div class="col-lg-5">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ error.msg }}
+                    </div>
+                </div>
+            {% elseif error.code == 1 %}
+                <div class="col-lg-5">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Attention !</strong> {{ error.msg }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+            <label>Nom du thème</label>
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+            <br />
+            <label>Description</label>
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description) }}
+            <br />
+            <br />
+            {{ form_widget(form.Ajout) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+{% endblock %}

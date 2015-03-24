@@ -52,8 +52,12 @@ teacher_addquizz:
     path:     /teacher/addquizz
     defaults: { _controller: QuizzQuizzBundle:Teacher:addQuizz }
 
+teacher_addlevel:
+    path:     /teacher/addlevel/{id_theme}
+    defaults: { _controller: QuizzQuizzBundle:Teacher:addLevel}
+
 teacher_levelsum:
-    path:     /teacher/levels
+    path:     /teacher/levels/{id_theme}
     defaults: { _controller: QuizzQuizzBundle:Teacher:showLevels }
 
 teacher_themesum:
@@ -61,7 +65,7 @@ teacher_themesum:
     defaults: { _controller: QuizzQuizzBundle:Teacher:themeSummary }
 
 teacher_quizzsum:
-    path:     /teacher/quizz
+    path:     /teacher/quizz/{id_level}
     defaults: { _controller: QuizzQuizzBundle:Teacher:showQuizz }
 
 teacher_about:

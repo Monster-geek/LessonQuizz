@@ -18,7 +18,7 @@
                     <i class="fa fa-dashboard"></i>  <a href="#">Acceuil</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Niveau disponibles
+                    <i class="fa fa-file"></i> Niveau disponible dans le theme {{ id_theme }}
                 </li>
             </ol>
         </div>
@@ -28,22 +28,22 @@
     <!-- Structure explanation : 3 blocs per line, class="col-lg-4". 1 bloc = 1 quizz  -->
 
     <!-- -->
-    <div class="row">
+    {% for level in level_array %}
         <div class="col-lg-4">
             <div class="list-group">
-                <a href="#" class="list-group-item ">
-                    <h4 class="list-group-item-heading">Lvl1</h4>
-                    <p class="list-group-item-text">Level 1</p>
+                <a href="{{ level.levelLink }}" class="list-group-item">
+                    <h4 class="list-group-item-heading">{{ level.name }}</h4>
+                    <p class="list-group-item-text">{{ level.description }}</p>
                 </a>
             </div>
         </div>
-    </div>
+    {% endfor %}
     <!-- /.row -->
 
     <div class="row">
         <div class="col-lg-4">
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-info">
+                <a href="{{ add_link }}" class="list-group-item list-group-item-info">
                     <h4 class="list-group-item-heading">Ajouter un nouveau niveau</h4>
                     <p class="list-group-item-text">Cliquez ici pour ajouter un nouveau niveau à ce thème.</p>
                 </a>
