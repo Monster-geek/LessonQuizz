@@ -33,8 +33,8 @@ class Themes {
      */
     public function __construct()
     {
-        $this->array_theme = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->themes_array = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->array_theme = new ArrayCollection();
+        $this->themes_array = new ArrayCollection();
     }
 
     /**
@@ -111,7 +111,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\Levels $arrayTheme
      */
-    public function removeArrayTheme(\Quizz\QuizzBundle\Entity\Levels $arrayTheme)
+    public function removeArrayTheme(Levels $arrayTheme)
     {
         $this->array_theme->removeElement($arrayTheme);
     }
@@ -132,7 +132,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Users $fkAutorid
      * @return Themes
      */
-    public function setFkAutorid(\Quizz\QuizzBundle\Entity\Users $fkAutorid = null)
+    public function setFkAutorid(Users $fkAutorid = null)
     {
         $this->fk_autorid = $fkAutorid;
 
@@ -155,7 +155,7 @@ class Themes {
      * @param \Quizz\QuizzBundle\Entity\Classroom $themesArray
      * @return Themes
      */
-    public function addThemesArray(\Quizz\QuizzBundle\Entity\Classroom $themesArray)
+    public function addThemesArray(Classroom $themesArray)
     {
         $this->themes_array[] = $themesArray;
 
@@ -167,7 +167,7 @@ class Themes {
      *
      * @param \Quizz\QuizzBundle\Entity\Classroom $themesArray
      */
-    public function removeThemesArray(\Quizz\QuizzBundle\Entity\Classroom $themesArray)
+    public function removeThemesArray(Classroom $themesArray)
     {
         $this->themes_array->removeElement($themesArray);
     }
@@ -180,5 +180,43 @@ class Themes {
     public function getThemesArray()
     {
         return $this->themes_array;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $array_levels;
+
+
+    /**
+     * Add array_levels
+     *
+     * @param \Quizz\QuizzBundle\Entity\Levels $arrayLevels
+     * @return Themes
+     */
+    public function addArrayLevel(Levels $arrayLevels)
+    {
+        $this->array_levels[] = $arrayLevels;
+
+        return $this;
+    }
+
+    /**
+     * Remove array_levels
+     *
+     * @param \Quizz\QuizzBundle\Entity\Levels $arrayLevels
+     */
+    public function removeArrayLevel(Levels $arrayLevels)
+    {
+        $this->array_levels->removeElement($arrayLevels);
+    }
+
+    /**
+     * Get array_levels
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArrayLevels()
+    {
+        return $this->array_levels;
     }
 }

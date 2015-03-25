@@ -14,15 +14,15 @@ Quizz\QuizzBundle\Entity\Questions:
             length: 20
 
     manyToOne:
-            Quizz:
-                targetEntity: Quizz
-                inversedBy: id
-                joinColumn:
-                    name: idquizz
-                    referencedColumnName: id
+         fk_quizz:
+            targetEntity: Quizz
+            inversedBy: fk_questions
+            joinColumn:
+                name: idquizz
+                referencedColumnName: id
     oneToOne:
         idanswer:
-          targetEntity: Answers
-          joinColumn:
-            name: idanswer
-            referencedColumnName: id
+            targetEntity: Answers
+            joinColumn:
+                name: idanswer
+                referencedColumnName: id

@@ -23,6 +23,6 @@ Quizz\QuizzBundle\Entity\Quizz:
                     name: idtheme
                     referencedColumnName: id
     oneToMany:
-        Questions:
+        fk_questions:
             targetEntity: Questions
-            mappedBy: id
+            mappedBy: fk_quizz

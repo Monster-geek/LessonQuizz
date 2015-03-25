@@ -14,7 +14,7 @@ Quizz\QuizzBundle\Entity\Themes:
             type: string
             lenght: 320
     oneToMany:
-            array_theme:
+            array_levels:
                 targetEntity: Levels
                 mappedBy: fk_idtheme
     manyToOne:

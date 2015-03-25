@@ -125,4 +125,32 @@ class Questions {
     {
         return $this->Quizz;
     }
+    /**
+     * @var \Quizz\QuizzBundle\Entity\Quizz
+     */
+    private $fk_quizz;
+
+
+    /**
+     * Set fk_quizz
+     *
+     * @param \Quizz\QuizzBundle\Entity\Quizz $fkQuizz
+     * @return Questions
+     */
+    public function setFkQuizz(\Quizz\QuizzBundle\Entity\Quizz $fkQuizz = null)
+    {
+        $this->fk_quizz = $fkQuizz;
+
+        return $this;
+    }
+
+    /**
+     * Get fk_quizz
+     *
+     * @return \Quizz\QuizzBundle\Entity\Quizz 
+     */
+    public function getFkQuizz()
+    {
+        return $this->fk_quizz;
+    }
 }

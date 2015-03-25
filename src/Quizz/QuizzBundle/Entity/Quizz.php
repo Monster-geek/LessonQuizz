@@ -12,11 +12,6 @@ class Quizz {
 
     private $description;
 
-    private $level;
-
-    private $idclass;
-
-
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -168,5 +163,49 @@ class Quizz {
     public function getFkIdlevel()
     {
         return $this->fk_idlevel;
+    }
+    /**
+     * @var integer
+     */
+    private $level;
+
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $fk_questions;
+
+
+    /**
+     * Add fk_questions
+     *
+     * @param \Quizz\QuizzBundle\Entity\Questions $fkQuestions
+     * @return Quizz
+     */
+    public function addFkQuestion(\Quizz\QuizzBundle\Entity\Questions $fkQuestions)
+    {
+        $this->fk_questions[] = $fkQuestions;
+
+        return $this;
+    }
+
+    /**
+     * Remove fk_questions
+     *
+     * @param \Quizz\QuizzBundle\Entity\Questions $fkQuestions
+     */
+    public function removeFkQuestion(\Quizz\QuizzBundle\Entity\Questions $fkQuestions)
+    {
+        $this->fk_questions->removeElement($fkQuestions);
+    }
+
+    /**
+     * Get fk_questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFkQuestions()
+    {
+        return $this->fk_questions;
     }
 }
